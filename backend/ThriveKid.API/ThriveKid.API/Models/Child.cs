@@ -16,7 +16,6 @@ namespace ThriveKid.API.Models
 
         public string? Gender { get; set; }
 
-        public int AgeinMonths =>
-            (int)((DateTime.UtcNow - DateOfBirth).TotalDays / 30.44);
+        public int AgeInMonths { get; set; }
     }
 }

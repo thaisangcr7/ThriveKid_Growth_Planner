@@ -160,10 +160,9 @@
             "type": "string",
             "nullable": true
           },
-          "ageinMonths": {
+          "ageInMonths": {
             "type": "integer",
-            "format": "int32",
-            "readOnly": true
+            "format": "int32"
           }
         },
         "additionalProperties": false
