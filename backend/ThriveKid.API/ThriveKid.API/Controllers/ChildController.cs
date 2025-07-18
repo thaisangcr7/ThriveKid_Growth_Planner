@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Models;
 
 namespace ThriveKid.API.Controllers
@@ -8,28 +9,74 @@ namespace ThriveKid.API.Controllers
     [ApiController]
     public class ChildController : ControllerBase
     {
-        private static List<Child> _children = new();
+        private readonly ThriveKidContext _context;
 
+        public ChildController(ThriveKidContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/child
         [HttpGet]
-        public ActionResult<IEnumerable<Child>> GetAll()
+        public async Task<ActionResult<IEnumerable<Child>>> GetAll()
         {
-            return Ok(_children);
+            return await _context.Children.ToListAsync();
         }
 
+        // GET: api/child/1
         [HttpGet("{id}")]
-        public ActionResult<Child> GetById(int id)
+        public async Task<ActionResult<Child>> GetById(int id)
         {
-            var child = _children.FirstOrDefault(c => c.Id == id);
-            if (child == null) return NotFound();
-            return Ok(child);
+            var child = await _context.Children.FindAsync(id);
+            if (child == null)
+                return NotFound();
+
+            return child;
         }
 
+        // POST: api/child
         [HttpPost]
-        public ActionResult<Child> Create(Child child)
+        public async Task<ActionResult<Child>> Create(Child child)
         {
-            child.Id = _children.Count + 1;
-            _children.Add(child);
+            _context.Children.Add(child);
+            await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(GetById), new { id = child.Id }, child);
+        }
+
+        // PUT: api/child/1
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateChild(int id, [FromBody] Child updatedChild)
+        {
+            if (id != updatedChild.Id)
+                return BadRequest("ID mismatch.");
+
+            var existingChild = await _context.Children.FindAsync(id);
+            if (existingChild == null)
+                return NotFound();
+
+            existingChild.FirstName = updatedChild.FirstName;
+            existingChild.LastName = updatedChild.LastName;
+            existingChild.DateOfBirth = updatedChild.DateOfBirth;
+            existingChild.Gender = updatedChild.Gender;
+            existingChild.AgeInMonths = updatedChild.AgeInMonths;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/child/1
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteChild(int id)
+        {
+            var child = await _context.Children.FindAsync(id);
+            if (child == null)
+                return NotFound();
+
+            _context.Children.Remove(child);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

@@ -70,5 +70,42 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ThriveKid.API.Controllers.ChildController",
+    "Method": "UpdateChild",
+    "RelativePath": "api/Child/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedChild",
+        "Type": "ThriveKid.API.Models.Child",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThriveKid.API.Controllers.ChildController",
+    "Method": "DeleteChild",
+    "RelativePath": "api/Child/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
