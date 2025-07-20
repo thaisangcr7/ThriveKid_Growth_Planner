@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Models;
+using ThriveKid.API.Services;
 
 namespace ThriveKid.API
 {
@@ -21,6 +22,12 @@ namespace ThriveKid.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Register the ChildService for dependency injection
+            // This allows us to use IChildService in controllers or other services
+            // This line tells .NET: “Whenever I need IChildService, give me ChildService.”
+            builder.Services.AddScoped<IChildService, ChildService>();
+
+            // Register the DbContext with the service container
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

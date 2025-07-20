@@ -1,80 +1,66 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using ThriveKid.API.Models;
+using ThriveKid.API.Services;
 
 namespace ThriveKid.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ChildController : ControllerBase
     {
-        private readonly ThriveKidContext _context;
+        private readonly IChildService _childService;
 
-        public ChildController(ThriveKidContext context)
+        public ChildController(IChildService childService)
         {
-            _context = context;
+            _childService = childService;
         }
 
-        // GET: api/child
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Child>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Child>>> GetAllChildren()
         {
-            return await _context.Children.ToListAsync();
+            var children = await _childService.GetAllAsync();
+            return Ok(children);
         }
 
-        // GET: api/child/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<Child>> GetById(int id)
+        public async Task<ActionResult<Child>> GetChildById(int id)
         {
-            var child = await _context.Children.FindAsync(id);
+            var child = await _childService.GetByIdAsync(id);
             if (child == null)
+            {
                 return NotFound();
+            }
 
-            return child;
+            return Ok(child);
         }
 
-        // POST: api/child
         [HttpPost]
-        public async Task<ActionResult<Child>> Create(Child child)
+        public async Task<ActionResult<Child>> CreateChild(Child child)
         {
-            _context.Children.Add(child);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetById), new { id = child.Id }, child);
+            var createdChild = await _childService.CreateAsync(child);
+            return CreatedAtAction(nameof(GetChildById), new { id = createdChild.Id }, createdChild);
         }
 
-        // PUT: api/child/1
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateChild(int id, [FromBody] Child updatedChild)
+        public async Task<IActionResult> UpdateChild(int id, Child updatedChild)
         {
-            if (id != updatedChild.Id)
-                return BadRequest("ID mismatch.");
-
-            var existingChild = await _context.Children.FindAsync(id);
-            if (existingChild == null)
+            var result = await _childService.UpdateAsync(id, updatedChild);
+            if (!result)
+            {
                 return NotFound();
+            }
 
-            existingChild.FirstName = updatedChild.FirstName;
-            existingChild.LastName = updatedChild.LastName;
-            existingChild.DateOfBirth = updatedChild.DateOfBirth;
-            existingChild.Gender = updatedChild.Gender;
-            existingChild.AgeInMonths = updatedChild.AgeInMonths;
-
-            await _context.SaveChangesAsync();
             return NoContent();
         }
 
-        // DELETE: api/child/1
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChild(int id)
         {
-            var child = await _context.Children.FindAsync(id);
-            if (child == null)
+            var result = await _childService.DeleteAsync(id);
+            if (!result)
+            {
                 return NotFound();
-
-            _context.Children.Remove(child);
-            await _context.SaveChangesAsync();
+            }
 
             return NoContent();
         }
