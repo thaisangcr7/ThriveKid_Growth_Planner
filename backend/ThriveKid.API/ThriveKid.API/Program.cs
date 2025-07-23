@@ -1,4 +1,4 @@
-
+﻿
 using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Models;
 using ThriveKid.API.Services;
@@ -24,7 +24,7 @@ namespace ThriveKid.API
 
             // Register the ChildService for dependency injection
             // This allows us to use IChildService in controllers or other services
-            // This line tells .NET: �Whenever I need IChildService, give me ChildService.�
+            // This line tells .NET: “Whenever I need IChildService, give me ChildService.”
             builder.Services.AddScoped<IChildService, ChildService>();
 
             // Register the DbContext with the service container
@@ -43,6 +43,16 @@ namespace ThriveKid.API
 
 
             app.MapControllers();
+
+            try
+            {
+                // 👇 Seed the database safely (catch errors during startup)
+                SeedData.Initialize(app.Services);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Seeding error: {ex.Message}");
+            }
 
             app.Run();
         }
