@@ -4,6 +4,10 @@ using ThriveKid.API.Models;
 
 namespace ThriveKid.API.Services
 {
+    // Service class that implements IChildService interface
+    // This class contains the business logic for managing child records
+    // It interacts with the database context to perform CRUD operations on the Children table.
+
     public class ChildService : IChildService
     {
         private readonly ThriveKidContext _context;

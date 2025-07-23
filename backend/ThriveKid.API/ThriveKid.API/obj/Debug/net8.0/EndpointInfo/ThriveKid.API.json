@@ -196,7 +196,8 @@
       "Child": {
         "required": [
           "dateOfBirth",
-          "firstName"
+          "firstName",
+          "lastName"
         ],
         "type": "object",
         "properties": {
@@ -210,8 +211,9 @@
             "type": "string"
           },
           "lastName": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
           },
           "dateOfBirth": {
             "type": "string",
@@ -222,6 +224,8 @@
             "nullable": true
           },
           "ageInMonths": {
+            "maximum": 240,
+            "minimum": 0,
             "type": "integer",
             "format": "int32"
           }

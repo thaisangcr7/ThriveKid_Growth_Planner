@@ -1,8 +1,12 @@
-﻿using ThriveKid.API.Models;
+﻿using System;
+using System.Diagnostics.Contracts;
+using ThriveKid.API.Models;
 
 namespace ThriveKid.API.Services
 {
     // Interface for child-related service operations
+    // Interface = contract.It tells your app: “this service must implement these methods.”
+
     public interface IChildService
     {
         // Get all children

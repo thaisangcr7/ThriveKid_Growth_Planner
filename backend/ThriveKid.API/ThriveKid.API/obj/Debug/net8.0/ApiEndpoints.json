@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "ThriveKid.API.Controllers.ChildController",
-    "Method": "GetAll",
+    "Method": "GetAllChildren",
     "RelativePath": "api/Child",
     "HttpMethod": "GET",
     "IsController": true,
@@ -21,7 +21,7 @@
   },
   {
     "ContainingType": "ThriveKid.API.Controllers.ChildController",
-    "Method": "Create",
+    "Method": "CreateChild",
     "RelativePath": "api/Child",
     "HttpMethod": "POST",
     "IsController": true,
@@ -47,7 +47,7 @@
   },
   {
     "ContainingType": "ThriveKid.API.Controllers.ChildController",
-    "Method": "GetById",
+    "Method": "GetChildById",
     "RelativePath": "api/Child/{id}",
     "HttpMethod": "GET",
     "IsController": true,
