@@ -44,5 +44,80 @@ namespace ThriveKid.API
         }
 
         // Placeholder for Milestone, FeedingLog, etc.
+        private static void SeedMilestones(ThriveKidContext context)
+        {
+            var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
+            var olivia = context.Children.FirstOrDefault(c => c.FirstName == "Olivia");
+
+            if (emma != null)
+            {
+                context.Milestones.AddRange(
+                    new Milestone
+                    {
+                        Description = "First smile",
+                        AchievedDate = new DateTime(2024, 1, 10),
+                        ChildId = emma.Id
+                    },
+                    new Milestone
+                    {
+                        Description = "Rolled over",
+                        AchievedDate = new DateTime(2024, 2, 15),
+                        ChildId = emma.Id
+                    }
+                );
+            }
+
+            if (olivia != null)
+            {
+                context.Milestones.Add(
+                    new Milestone
+                    {
+                        Description = "Started crawling",
+                        AchievedDate = new DateTime(2024, 3, 20),
+                        ChildId = olivia.Id
+                    }
+                );
+            }
+        }
+
+        private static void SeedFeedingLogs(ThriveKidContext context)
+        {
+            var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
+            var olivia = context.Children.FirstOrDefault(c => c.FirstName == "Olivia");
+
+            if (emma != null)
+            {
+                context.FeedingLogs.AddRange(
+                    new FeedingLog
+                    {
+                        FeedingTime = DateTime.Now.AddHours(-2),
+                        MealType = "Breastmilk",
+                        Notes = "Fed well",
+                        ChildId = emma.Id
+                    },
+                    new FeedingLog
+                    {
+                        FeedingTime = DateTime.Now.AddHours(-1),
+                        MealType = "Formula",
+                        Notes = "Spit up slightly",
+                        ChildId = emma.Id
+                    }
+                );
+            }
+
+            if (olivia != null)
+            {
+                context.FeedingLogs.Add(
+                    new FeedingLog
+                    {
+                        FeedingTime = DateTime.Now.AddHours(-3),
+                        MealType = "Solid",
+                        Notes = "Ate banana mash",
+                        ChildId = olivia.Id
+                    }
+                );
+            }
+        }
+            // Note: Ensure to add any additional seeding methods for other models as needed.
     }
 }
