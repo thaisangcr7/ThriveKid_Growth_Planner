@@ -9,5 +9,11 @@ namespace ThriveKid.API.Models
         {
         }
         public DbSet<Child> Children { get; set; } = null!;
+        public DbSet<Milestone> Milestones { get; set; }
+
+        public DbSet<FeedingLog> FeedingLogs { get; set; }
+
+
+
     }
 }

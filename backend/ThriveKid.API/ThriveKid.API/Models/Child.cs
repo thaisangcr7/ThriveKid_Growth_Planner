@@ -21,5 +21,10 @@ namespace ThriveKid.API.Models
 
         [Range(0, 240, ErrorMessage = "Age in months must be between 0 and 240.")]
         public int AgeInMonths { get; set; }
+
+        public ICollection<Milestone> Milestones { get; set; } = new List<Milestone>();
+
+        public ICollection<FeedingLog> FeedingLogs { get; set; } = new List<FeedingLog>();
+
     }
 }
