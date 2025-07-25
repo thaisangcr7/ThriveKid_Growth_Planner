@@ -1,21 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ThriveKid.API.Models;
 
-namespace ThriveKid.API.Models
+public class Milestone
 {
-    public class Milestone
-    {
-        [Key]
-        public int Id { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-        [Required]
-        public string Description { get; set; } = string.Empty;
+    [Required]
+    public string Description { get; set; }
 
-        public DateTime AchievedDate { get; set; }
+    public DateTime AchievedDate { get; set; }
 
-        // 🔗 Relationship to Child
-        [ForeignKey("Child")]
-        public int ChildId { get; set; }
-        public Child? Child { get; set; }
-    }
+    // Foreign Key Relationship to Child
+    public int ChildId { get; set; }
+
+    [ForeignKey("ChildId")]
+    public Child Child { get; set; }
 }

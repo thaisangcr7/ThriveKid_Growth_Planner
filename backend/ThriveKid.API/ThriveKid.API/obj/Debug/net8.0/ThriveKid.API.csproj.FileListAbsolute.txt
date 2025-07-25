@@ -159,3 +159,4 @@ C:\Users\Sang Thai\Desktop\ThriveKid\backend\ThriveKid.API\ThriveKid.API\bin\Deb
 C:\Users\Sang Thai\Desktop\ThriveKid\backend\ThriveKid.API\ThriveKid.API\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\Sang Thai\Desktop\ThriveKid\backend\ThriveKid.API\ThriveKid.API\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\Sang Thai\Desktop\ThriveKid\backend\ThriveKid.API\ThriveKid.API\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\Sang Thai\Desktop\ThriveKid\backend\ThriveKid.API\ThriveKid.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

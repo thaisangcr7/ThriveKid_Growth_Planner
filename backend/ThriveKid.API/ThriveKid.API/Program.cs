@@ -26,6 +26,7 @@ namespace ThriveKid.API
             // This allows us to use IChildService in controllers or other services
             // This line tells .NET: “Whenever I need IChildService, give me ChildService.”
             builder.Services.AddScoped<IChildService, ChildService>();
+            builder.Services.AddScoped<IMilestoneService, MilestoneService>();
 
             // Register the DbContext with the service container
             var app = builder.Build();

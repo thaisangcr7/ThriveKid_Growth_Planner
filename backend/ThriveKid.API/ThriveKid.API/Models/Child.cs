@@ -7,7 +7,7 @@ namespace ThriveKid.API.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "First name is required.")]
-        [MaxLength(50, ErrorMessage = "First name muist be under 50 characters.")]
+        [MaxLength(50, ErrorMessage = "First name must be under 50 characters.")]
         public string? FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name is required.")]
