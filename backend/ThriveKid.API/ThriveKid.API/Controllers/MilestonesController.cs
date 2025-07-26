@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ThriveKid.API.Models;
-using ThriveKid.API.Services;
+using ThriveKid.API.Services.Interfaces;
 /* 
 | Line                                  | Purpose                                                                               |
 | ------------------------------------- | ------------------------------------------------------------------------------------- |
