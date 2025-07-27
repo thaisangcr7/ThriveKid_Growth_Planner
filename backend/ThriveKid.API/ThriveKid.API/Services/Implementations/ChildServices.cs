@@ -50,19 +50,19 @@ namespace ThriveKid.API.Services.Implementations
 
         // Update an existing child record by primary key (id) using UpdateChildDto.
         public async Task<bool> UpdateAsync(int id, UpdateChildDto updateDto)
-        {
-            var existing = await _context.Children.FindAsync(id);
-            if (existing == null) return false;
+{
+    var existing = await _context.Children.FindAsync(id);
+    if (existing == null) return false;
 
-            existing.FirstName = updateDto.FirstName;
-            existing.LastName = updateDto.LastName;
-            existing.DateOfBirth = updateDto.DateOfBirth ?? existing.DateOfBirth;
-            existing.Gender = updateDto.Gender;
-            existing.AgeInMonths = updateDto.AgeInMonths ?? existing.AgeInMonths;
+    existing.FirstName = updateDto.FirstName;
+    existing.LastName = updateDto.LastName;
+    existing.DateOfBirth = updateDto.DateOfBirth ?? existing.DateOfBirth;
+    existing.Gender = updateDto.Gender;
+    existing.AgeInMonths = updateDto.AgeInMonths ?? existing.AgeInMonths;
 
-            await _context.SaveChangesAsync();
-            return true;
-        }
+    await _context.SaveChangesAsync();
+    return true;
+}
 
 
         // Delete a child record by primary key (id).

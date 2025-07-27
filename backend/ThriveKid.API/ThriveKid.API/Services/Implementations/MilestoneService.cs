@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Models;
+using ThriveKid.API.Services.Interfaces;
 
-namespace ThriveKid.API.Services
+namespace ThriveKid.API.Services.Implementations
 {
     public class MilestoneService : IMilestoneService
     {

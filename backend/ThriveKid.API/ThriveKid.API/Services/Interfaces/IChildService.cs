@@ -1,12 +1,8 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using ThriveKid.API.Models;
+﻿using ThriveKid.API.Models;
+using ThriveKid.API.DTOs.Children;
 
-namespace ThriveKid.API.Services
+namespace ThriveKid.API.Services.Interfaces
 {
-    // Interface for child-related service operations
-    // Interface = contract.It tells your app: “this service must implement these methods.”
-
     public interface IChildService
     {
         // Get all children
@@ -15,11 +11,11 @@ namespace ThriveKid.API.Services
         // Get a child by its ID
         Task<Child?> GetByIdAsync(int id);
 
-        // Create a new child
-        Task<Child> CreateAsync(Child child);
+        // ✅ Create a new child from CreateChildDto
+        Task<Child> CreateChildAsync(CreateChildDto createDto);
 
-        // Update an existing child by ID
-        Task<bool> UpdateAsync(int id, Child updatedChild);
+        // ✅ Update an existing child using UpdateChildDto
+        Task<bool> UpdateAsync(int id, UpdateChildDto updateDto);
 
         // Delete a child by ID
         Task<bool> DeleteAsync(int id);

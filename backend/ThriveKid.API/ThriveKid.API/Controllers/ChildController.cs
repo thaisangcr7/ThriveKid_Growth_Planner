@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ThriveKid.API.DTOs.Children;
 using ThriveKid.API.Models;
 using ThriveKid.API.Services.Interfaces;
 
@@ -42,35 +44,39 @@ namespace ThriveKid.API.Controllers
         // ✅ POST: api/child
         // Creates a new child record
         [HttpPost]
-        public async Task<ActionResult<Child>> CreateChild(Child child)
+        public async Task<ActionResult<ChildDto>> CreateChild([FromBody] CreateChildDto createDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState); // sends validation errors back to client
+            if (createDto == null)
+                return BadRequest("Child data is required.");
 
-            var createdChild = await _childService.CreateAsync(child);
+            var child = await _childService.CreateChildAsync(createDto);
 
-            // Returns 201 Created with a location header pointing to the new resource
-            return CreatedAtAction(nameof(GetChildById), new { id = createdChild.Id }, createdChild);
+            if (child == null)
+                return StatusCode(500, "An error occurred while creating the child.");
+
+            return CreatedAtAction(nameof(GetChildById), new { id = child.Id }, child);
         }
+
 
         // ✅ PUT: api/child/{id}
         // Updates an existing child. Returns 400 if ID mismatch, 404 if not found
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateChild(int id, Child updatedChild)
+        public async Task<IActionResult> UpdateChild(int id, UpdateChildDto updateDto)
         {
-            if (id != updatedChild.Id)
-                return BadRequest("ID mismatch."); // 400 Bad Request if path ID ≠ body ID
+            if (id != updateDto.Id)
+                return BadRequest("ID mismatch."); // 400 Bad Request if ID in URL ≠ ID in body
 
             if (!ModelState.IsValid)
-                return BadRequest(ModelState); // 400 Bad Request if model validation fails
-            
-            // Call service to update child
-            var result = await _childService.UpdateAsync(id, updatedChild);
-            if (!result)
-                return NotFound(); // 404 if no child with this ID
+                return BadRequest(ModelState);
 
-            return NoContent(); // 204 No Content (success but no response body)
+            var result = await _childService.UpdateAsync(id, updateDto);
+            if (!result)
+                return NotFound(); // 404 if no child found
+
+            return NoContent(); // 204 No Content if successful
         }
+
+
 
         // ✅ DELETE: api/child/{id}
         // Deletes a child by ID. Returns 404 if not found

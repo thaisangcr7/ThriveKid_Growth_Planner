@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Models;
-using ThriveKid.API.Services;
+using ThriveKid.API.Services.Implementations;
 using ThriveKid.API.Services.Interfaces;
 
 namespace ThriveKid.API
@@ -48,13 +48,17 @@ namespace ThriveKid.API
 
             try
             {
-                // 👇 Seed the database safely (catch errors during startup)
-                SeedData.Initialize(app.Services);
+                using (var scope = app.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    SeedData.Initialize(services); 
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ Seeding error: {ex.Message}");
             }
+
 
             app.Run();
         }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThriveKid.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61485004e98a61c099de0c14ab9959de6aeb49f8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fbcb39066468971175103b08cb9f125acdcf8812")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThriveKid.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThriveKid.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

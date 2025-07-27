@@ -1,6 +1,6 @@
 ﻿using ThriveKid.API.Models;
 
-namespace ThriveKid.API.Services
+namespace ThriveKid.API.Services.Interfaces
 {
     public interface IMilestoneService
     {
