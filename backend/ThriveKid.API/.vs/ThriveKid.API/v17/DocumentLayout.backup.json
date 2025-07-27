@@ -3,16 +3,68 @@
   "WorkspaceRootPath": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\services\\implementations\\milestoneservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\services\\implementations\\milestoneservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\dtos\\milestones\\createmilestonedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\dtos\\milestones\\createmilestonedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\dtos\\milestones\\milestonedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\dtos\\milestones\\milestonedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\dtos\\milestones\\updatemilestonedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\dtos\\milestones\\updatemilestonedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\models\\milestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\models\\milestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\services\\interfaces\\imilestoneservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\services\\interfaces\\imilestoneservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\services\\interfaces\\ichildservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\services\\interfaces\\ichildservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\models\\child.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\models\\child.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\services\\implementations\\childservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\services\\implementations\\childservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\controllers\\milestonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\controllers\\milestonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\dtos\\children\\childdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\dtos\\children\\childdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\dtos\\children\\createchilddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\dtos\\children\\createchilddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\models\\thrivekidcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\models\\thrivekidcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\models\\feedinglog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\models\\feedinglog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\controllers\\childcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\controllers\\childcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\dtos\\children\\createchilddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\dtos\\children\\createchilddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\dtos\\children\\updatechilddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,46 +79,6 @@
       "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\services\\interfaces\\ichildservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\services\\interfaces\\ichildservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\dtos\\children\\childdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\dtos\\children\\childdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\models\\feedinglog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\models\\feedinglog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\services\\implementations\\milestoneservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\services\\implementations\\milestoneservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\services\\interfaces\\imilestoneservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\services\\interfaces\\imilestoneservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\controllers\\milestonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\controllers\\milestonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\models\\milestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\models\\milestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\models\\thrivekidcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\models\\thrivekidcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\models\\child.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\models\\child.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|c:\\users\\sang thai\\desktop\\thrivekid\\backend\\thrivekid.api\\thrivekid.api\\childendpoints.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{F3E806FC-86A1-4479-95D1-55AE538F7C98}|ThriveKid.API\\ThriveKid.API.csproj|solutionrelative:thrivekid.api\\childendpoints.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     }
@@ -78,7 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 491,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,7 +102,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
+              "Title": "UpdateMilestoneDto.cs",
+              "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Milestones\\UpdateMilestoneDto.cs",
+              "RelativeDocumentMoniker": "ThriveKid.API\\DTOs\\Milestones\\UpdateMilestoneDto.cs",
+              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Milestones\\UpdateMilestoneDto.cs",
+              "RelativeToolTip": "ThriveKid.API\\DTOs\\Milestones\\UpdateMilestoneDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-27T20:36:38.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateMilestoneDto.cs",
+              "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Milestones\\CreateMilestoneDto.cs",
+              "RelativeDocumentMoniker": "ThriveKid.API\\DTOs\\Milestones\\CreateMilestoneDto.cs",
+              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Milestones\\CreateMilestoneDto.cs*",
+              "RelativeToolTip": "ThriveKid.API\\DTOs\\Milestones\\CreateMilestoneDto.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-27T20:35:17.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MilestoneDto.cs",
+              "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Milestones\\MilestoneDto.cs",
+              "RelativeDocumentMoniker": "ThriveKid.API\\DTOs\\Milestones\\MilestoneDto.cs",
+              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Milestones\\MilestoneDto.cs*",
+              "RelativeToolTip": "ThriveKid.API\\DTOs\\Milestones\\MilestoneDto.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-27T20:35:02.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "ChildDto.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Children\\ChildDto.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\DTOs\\Children\\ChildDto.cs",
@@ -103,12 +154,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 16,
               "Title": "UpdateChildDto.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Children\\UpdateChildDto.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\DTOs\\Children\\UpdateChildDto.cs",
-              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Children\\UpdateChildDto.cs*",
-              "RelativeToolTip": "ThriveKid.API\\DTOs\\Children\\UpdateChildDto.cs*",
+              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Children\\UpdateChildDto.cs",
+              "RelativeToolTip": "ThriveKid.API\\DTOs\\Children\\UpdateChildDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-26T05:18:35.137Z",
@@ -116,12 +167,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 11,
               "Title": "CreateChildDto.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Children\\CreateChildDto.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\DTOs\\Children\\CreateChildDto.cs",
-              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Children\\CreateChildDto.cs*",
-              "RelativeToolTip": "ThriveKid.API\\DTOs\\Children\\CreateChildDto.cs*",
+              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\DTOs\\Children\\CreateChildDto.cs",
+              "RelativeToolTip": "ThriveKid.API\\DTOs\\Children\\CreateChildDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-26T05:17:25.27Z",
@@ -129,46 +180,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 9,
               "Title": "MilestonesController.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Controllers\\MilestonesController.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Controllers\\MilestonesController.cs",
               "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Controllers\\MilestonesController.cs",
               "RelativeToolTip": "ThriveKid.API\\Controllers\\MilestonesController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAIwFAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAgwFAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-25T04:51:30.426Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 0,
               "Title": "MilestoneService.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Services\\Implementations\\MilestoneService.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Services\\Implementations\\MilestoneService.cs",
-              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Services\\Implementations\\MilestoneService.cs",
-              "RelativeToolTip": "ThriveKid.API\\Services\\Implementations\\MilestoneService.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAcwDcAAAABAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Services\\Implementations\\MilestoneService.cs*",
+              "RelativeToolTip": "ThriveKid.API\\Services\\Implementations\\MilestoneService.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-25T04:41:28.069Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 5,
               "Title": "IMilestoneService.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Services\\Interfaces\\IMilestoneService.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Services\\Interfaces\\IMilestoneService.cs",
               "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Services\\Interfaces\\IMilestoneService.cs",
               "RelativeToolTip": "ThriveKid.API\\Services\\Interfaces\\IMilestoneService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-25T04:36:11.241Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "Feedinglog.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Models\\Feedinglog.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Models\\Feedinglog.cs",
@@ -181,19 +232,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 4,
               "Title": "Milestone.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Models\\Milestone.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Models\\Milestone.cs",
-              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Models\\Milestone.cs",
-              "RelativeToolTip": "ThriveKid.API\\Models\\Milestone.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Models\\Milestone.cs*",
+              "RelativeToolTip": "ThriveKid.API\\Models\\Milestone.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T04:36:21.774Z"
+              "WhenOpened": "2025-07-23T04:36:21.774Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 17,
               "Title": "SeedData.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Data\\SeedData.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Data\\SeedData.cs",
@@ -206,13 +258,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "ChildServices.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Services\\Implementations\\ChildServices.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Services\\Implementations\\ChildServices.cs",
-              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Services\\Implementations\\ChildServices.cs*",
-              "RelativeToolTip": "ThriveKid.API\\Services\\Implementations\\ChildServices.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Services\\Implementations\\ChildServices.cs",
+              "RelativeToolTip": "ThriveKid.API\\Services\\Implementations\\ChildServices.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAcwE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-20T05:21:45.847Z",
               "EditorCaption": ""
@@ -232,7 +284,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 18,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\appsettings.json",
               "RelativeDocumentMoniker": "ThriveKid.API\\appsettings.json",
@@ -245,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 12,
               "Title": "ThriveKidContext.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Models\\ThriveKidContext.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Models\\ThriveKidContext.cs",
@@ -253,24 +305,25 @@
               "RelativeToolTip": "ThriveKid.API\\Models\\ThriveKidContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T01:17:34.52Z"
+              "WhenOpened": "2025-07-17T01:17:34.52Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 14,
               "Title": "ChildController.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Controllers\\ChildController.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Controllers\\ChildController.cs",
               "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Controllers\\ChildController.cs",
               "RelativeToolTip": "ThriveKid.API\\Controllers\\ChildController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T05:47:09.421Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "ChildEndpoints.http",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\ChildEndpoints.http",
               "RelativeDocumentMoniker": "ThriveKid.API\\ChildEndpoints.http",
@@ -282,28 +335,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Program.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Program.cs",
               "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Program.cs",
               "RelativeToolTip": "ThriveKid.API\\Program.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwC8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAkwC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T05:27:20.502Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 7,
               "Title": "Child.cs",
               "DocumentMoniker": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Models\\Child.cs",
               "RelativeDocumentMoniker": "ThriveKid.API\\Models\\Child.cs",
               "ToolTip": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\Models\\Child.cs",
               "RelativeToolTip": "ThriveKid.API\\Models\\Child.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwB4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T04:41:27.862Z"
+              "WhenOpened": "2025-07-16T04:41:27.862Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",

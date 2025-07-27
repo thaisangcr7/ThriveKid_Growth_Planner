@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ThriveKid.API.DTOs.Milestones;
 using ThriveKid.API.Models;
 using ThriveKid.API.Services.Interfaces;
 
@@ -13,31 +14,63 @@ namespace ThriveKid.API.Services.Implementations
             _context = context;
         }
 
-        public async Task<IEnumerable<Milestone>> GetAllAsync()
+        public async Task<IEnumerable<MilestoneDto>> GetAllAsync()
         {
-            return await _context.Milestones.ToListAsync();
+            return await _context.Milestones
+                .Include(m => m.Child)
+                .Select(m => new MilestoneDto
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Notes = m.Notes,
+                    AchievedDate = m.AchievedDate,
+                    ChildId = m.ChildId,
+                    ChildName = m.Child.FirstName + " " + m.Child.LastName
+                })
+                .ToListAsync();
         }
 
-        public async Task<Milestone?> GetByIdAsync(int id)
+        public async Task<MilestoneDto?> GetByIdAsync(int id)
         {
-            return await _context.Milestones.FindAsync(id);
+            var m = await _context.Milestones.Include(m => m.Child).FirstOrDefaultAsync(m => m.Id == id);
+            if (m == null) return null;
+
+            return new MilestoneDto
+            {
+                Id = m.Id,
+                Title = m.Title,
+                Notes = m.Notes,
+                AchievedDate = m.AchievedDate,
+                ChildId = m.ChildId,
+                ChildName = m.Child.FirstName + " " + m.Child.LastName
+            };
         }
 
-        public async Task<Milestone> CreateAsync(Milestone milestone)
+        public async Task<MilestoneDto> CreateAsync(CreateMilestoneDto dto, int childId)
         {
+            var milestone = new Milestone
+            {
+                Title = dto.Title,
+                Notes = dto.Notes,
+                AchievedDate = dto.AchievedDate,
+                ChildId = childId
+            };
+
             _context.Milestones.Add(milestone);
             await _context.SaveChangesAsync();
-            return milestone;
+
+            // Re-fetch to include child info
+            return await GetByIdAsync(milestone.Id);
         }
 
-        public async Task<bool> UpdateAsync(int id, Milestone updatedMilestone)
+        public async Task<bool> UpdateAsync(int id, UpdateMilestoneDto dto)
         {
             var existing = await _context.Milestones.FindAsync(id);
             if (existing == null) return false;
 
-            existing.Description = updatedMilestone.Description;
-            existing.AchievedDate = updatedMilestone.AchievedDate;
-            existing.ChildId = updatedMilestone.ChildId;
+            existing.Title = dto.Title;
+            existing.Notes = dto.Notes;
+            existing.AchievedDate = dto.AchievedDate;
 
             await _context.SaveChangesAsync();
             return true;
@@ -54,13 +87,3 @@ namespace ThriveKid.API.Services.Implementations
         }
     }
 }
-
-/* 
- What this class does (line by line):
-Method	What it does
-GetAllAsync	Fetches all milestones from the database
-GetByIdAsync(id)	Gets one milestone by ID
-CreateAsync(milestone)	Adds a new milestone to the DB
-UpdateAsync(id, updatedMilestone)	Updates an existing milestone if it exists
-DeleteAsync(id)	Deletes the milestone if found
-*/

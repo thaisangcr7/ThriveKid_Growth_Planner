@@ -1,17 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ThriveKid.API.Models;
+using ThriveKid.API.DTOs.Milestones;
 using ThriveKid.API.Services.Interfaces;
-/* 
-| Line                                  | Purpose                                                                               |
-| ------------------------------------- | ------------------------------------------------------------------------------------- |
-| `IMilestoneService _milestoneService` | This uses the service abstraction you built (good for testing and clean architecture) |
-| `GetAll()`                            | GETs a list of all milestones                                                         |
-| `GetById(id)`                         | Finds a specific milestone                                                            |
-| `Create()`                            | Adds a new milestone                                                                  |
-| `Update()`                            | Edits an existing milestone                                                           |
-| `Delete()`                            | Removes a milestone by ID                                                             |
- 
-*/
+
 namespace ThriveKid.API.Controllers
 {
     [Route("api/[controller]")]
@@ -25,17 +15,17 @@ namespace ThriveKid.API.Controllers
             _milestoneService = milestoneService;
         }
 
-        // GET: api/milestones
+        // ✅ GET: api/milestones
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Milestone>>> GetAll()
+        public async Task<ActionResult<IEnumerable<MilestoneDto>>> GetAll()
         {
             var milestones = await _milestoneService.GetAllAsync();
             return Ok(milestones);
         }
 
-        // GET: api/milestones/5
+        // ✅ GET: api/milestones/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Milestone>> GetById(int id)
+        public async Task<ActionResult<MilestoneDto>> GetById(int id)
         {
             var milestone = await _milestoneService.GetByIdAsync(id);
             if (milestone == null)
@@ -44,29 +34,26 @@ namespace ThriveKid.API.Controllers
             return Ok(milestone);
         }
 
-        // POST: api/milestones
-        [HttpPost]
-        public async Task<ActionResult<Milestone>> Create(Milestone milestone)
+        // ✅ POST: api/milestones/{childId}
+        [HttpPost("{childId}")]
+        public async Task<ActionResult<MilestoneDto>> Create(int childId, CreateMilestoneDto dto)
         {
-            var created = await _milestoneService.CreateAsync(milestone);
+            var created = await _milestoneService.CreateAsync(dto, childId);
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
-        // PUT: api/milestones/5
+        // ✅ PUT: api/milestones/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Milestone milestone)
+        public async Task<IActionResult> Update(int id, UpdateMilestoneDto dto)
         {
-            if (id != milestone.Id)
-                return BadRequest("ID mismatch");
-
-            var success = await _milestoneService.UpdateAsync(id, milestone);
+            var success = await _milestoneService.UpdateAsync(id, dto);
             if (!success)
                 return NotFound();
 
             return NoContent();
         }
 
-        // DELETE: api/milestones/5
+        // ✅ DELETE: api/milestones/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

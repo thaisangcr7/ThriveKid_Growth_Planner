@@ -39,17 +39,20 @@ namespace ThriveKid.API
             context.Milestones.AddRange(
                 new Milestone
                 {
-                    Description = "First smile",
+                    Title = "First smile", // ✅ Updated property name
+                    Notes = "She smiled during bath time.",
                     AchievedDate = new DateTime(2024, 1, 10),
                     ChildId = emma.Id
                 },
                 new Milestone
                 {
-                    Description = "Rolled over",
+                    Title = "Rolled over",
+                    Notes = "Rolled on tummy time mat",
                     AchievedDate = new DateTime(2024, 2, 15),
                     ChildId = emma.Id
                 }
             );
+
 
             // STEP 3 – Seed FeedingLogs using actual child Ids
             context.FeedingLogs.AddRange(

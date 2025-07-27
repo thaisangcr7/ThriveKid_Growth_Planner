@@ -4,17 +4,15 @@ using ThriveKid.API.Models;
 
 public class Milestone
 {
-    [Key]
     public int Id { get; set; }
 
-    [Required]
-    public string Description { get; set; }
+    public string Title { get; set; } = string.Empty;
+
+    public string Notes { get; set; } = string.Empty;
 
     public DateTime AchievedDate { get; set; }
 
-    // Foreign Key Relationship to Child
     public int ChildId { get; set; }
 
-    [ForeignKey("ChildId")]
-    public Child Child { get; set; }
+    public Child? Child { get; set; }
 }
