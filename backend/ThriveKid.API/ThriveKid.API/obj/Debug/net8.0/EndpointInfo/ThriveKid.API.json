@@ -190,6 +190,201 @@
         }
       }
     },
+    "/api/FeedingLogs": {
+      "get": {
+        "tags": [
+          "FeedingLogs"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeedingLogDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeedingLogDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeedingLogDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "FeedingLogs"
+        ],
+        "parameters": [
+          {
+            "name": "childId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFeedingLogDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFeedingLogDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFeedingLogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedingLogDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedingLogDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedingLogDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeedingLogs/{id}": {
+      "get": {
+        "tags": [
+          "FeedingLogs"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedingLogDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedingLogDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedingLogDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FeedingLogs"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeedingLogDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeedingLogDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeedingLogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FeedingLogs"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Milestones": {
       "get": {
         "tags": [
@@ -203,7 +398,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Milestone"
+                    "$ref": "#/components/schemas/MilestoneDto"
                   }
                 }
               },
@@ -211,7 +406,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Milestone"
+                    "$ref": "#/components/schemas/MilestoneDto"
                   }
                 }
               },
@@ -219,54 +414,8 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Milestone"
+                    "$ref": "#/components/schemas/MilestoneDto"
                   }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Milestones"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Milestone"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Milestone"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Milestone"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Milestone"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Milestone"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Milestone"
                 }
               }
             }
@@ -296,17 +445,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Milestone"
+                  "$ref": "#/components/schemas/MilestoneDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Milestone"
+                  "$ref": "#/components/schemas/MilestoneDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Milestone"
+                  "$ref": "#/components/schemas/MilestoneDto"
                 }
               }
             }
@@ -332,17 +481,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Milestone"
+                "$ref": "#/components/schemas/UpdateMilestoneDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Milestone"
+                "$ref": "#/components/schemas/UpdateMilestoneDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Milestone"
+                "$ref": "#/components/schemas/UpdateMilestoneDto"
               }
             }
           }
@@ -371,6 +520,65 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Milestones/{childId}": {
+      "post": {
+        "tags": [
+          "Milestones"
+        ],
+        "parameters": [
+          {
+            "name": "childId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMilestoneDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMilestoneDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMilestoneDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneDto"
+                }
+              }
+            }
           }
         }
       }
@@ -495,8 +703,56 @@
         },
         "additionalProperties": false
       },
+      "CreateFeedingLogDto": {
+        "required": [
+          "feedingTime",
+          "mealType"
+        ],
+        "type": "object",
+        "properties": {
+          "feedingTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mealType": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateMilestoneDto": {
+        "required": [
+          "achievedDate",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "notes": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "achievedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "FeedingLog": {
         "required": [
+          "feedingTime",
           "mealType"
         ],
         "type": "object",
@@ -527,19 +783,50 @@
         },
         "additionalProperties": false
       },
-      "Milestone": {
-        "required": [
-          "description"
-        ],
+      "FeedingLogDto": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
           },
-          "description": {
-            "minLength": 1,
-            "type": "string"
+          "feedingTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mealType": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "childId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Milestone": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
           },
           "achievedDate": {
             "type": "string",
@@ -551,6 +838,36 @@
           },
           "child": {
             "$ref": "#/components/schemas/Child"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MilestoneDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "achievedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "childId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childName": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -591,6 +908,46 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateFeedingLogDto": {
+        "required": [
+          "feedingTime",
+          "mealType"
+        ],
+        "type": "object",
+        "properties": {
+          "feedingTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mealType": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateMilestoneDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "achievedDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
