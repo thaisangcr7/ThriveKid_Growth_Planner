@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\ThriveKid.API.csproj": {}
+    "/Users/sangth/Projects/ThriveKid_Growth_Planner/backend/ThriveKid.API/ThriveKid.API/ThriveKid.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\ThriveKid.API.csproj": {
+    "/Users/sangth/Projects/ThriveKid_Growth_Planner/backend/ThriveKid.API/ThriveKid.API/ThriveKid.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\ThriveKid.API.csproj",
+        "projectUniqueName": "/Users/sangth/Projects/ThriveKid_Growth_Planner/backend/ThriveKid.API/ThriveKid.API/ThriveKid.API.csproj",
         "projectName": "ThriveKid.API",
-        "projectPath": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\ThriveKid.API.csproj",
-        "packagesPath": "C:\\Users\\Sang Thai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sang Thai\\Desktop\\ThriveKid\\backend\\ThriveKid.API\\ThriveKid.API\\obj\\",
+        "projectPath": "/Users/sangth/Projects/ThriveKid_Growth_Planner/backend/ThriveKid.API/ThriveKid.API/ThriveKid.API.csproj",
+        "packagesPath": "/Users/sangth/.nuget/packages/",
+        "outputPath": "/Users/sangth/Projects/ThriveKid_Growth_Planner/backend/ThriveKid.API/ThriveKid.API/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Sang Thai\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/sangth/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,8 +37,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -88,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.412/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

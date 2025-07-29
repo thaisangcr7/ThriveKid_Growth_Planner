@@ -32,6 +32,7 @@ namespace ThriveKid.API
 
             // Register the DbContext with the service container
             var app = builder.Build();
+                       // <-- Required for Swagger
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -60,7 +61,8 @@ namespace ThriveKid.API
                 Console.WriteLine($"❌ Seeding error: {ex.Message}");
             }
 
-
+            // Run the application
+            app.MapGet("/", () => "ThriveKid API is running!");
             app.Run();
         }
     }
