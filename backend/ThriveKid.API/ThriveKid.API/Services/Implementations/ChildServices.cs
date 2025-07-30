@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Models;
 using ThriveKid.API.DTOs.Children;
 using ThriveKid.API.Services.Interfaces;
+using ThriveKid.API.Data;
 
 namespace ThriveKid.API.Services.Implementations
 {

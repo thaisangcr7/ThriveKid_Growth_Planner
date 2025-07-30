@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using ThriveKid.API.Models;
+using ThriveKid.API.Data;
 using ThriveKid.API.Services.Implementations;
 using ThriveKid.API.Services.Interfaces;
 
