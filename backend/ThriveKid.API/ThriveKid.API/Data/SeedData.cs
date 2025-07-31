@@ -1,15 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Models;
+using ThriveKid.API.Data;
+using ThriveKid.API.Services;
+using System;
 
-namespace ThriveKid.API
+// This class seeds initial data into the database
+// It is called during application startup to ensure the database has some initial data
+// This is useful for development and testing purposes
+
+namespace ThriveKid.API.Data
 {
     public static class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using var context = new ThriveKidContext(
-                serviceProvider.GetRequiredService<DbContextOptions<ThriveKidContext>>());
-
+            using var context = serviceProvider.GetRequiredService<ThriveKidContext>(); // ✅ correct correct
             // Prevent reseeding
             if (context.Children.Any()) return;
 
