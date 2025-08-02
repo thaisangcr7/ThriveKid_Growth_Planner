@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThriveKid.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ed3c6f2e41b8f6465b725b1e17b947dfd9fe2f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f00e7d44e596410b960486e73880a73a8ea13866")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThriveKid.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThriveKid.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
