@@ -1,11 +1,9 @@
 ﻿
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using ThriveKid.API.Data; // Add this if ThriveKidContext is in the Data namespace
+using ThriveKid.API.Data;
 using ThriveKid.API.Services.Implementations;
 using ThriveKid.API.Services.Interfaces;
-using ThriveKid.API.Models;
-
-// Ensure the namespace matches your project structure
 
 namespace ThriveKid.API
 {
@@ -32,7 +30,9 @@ namespace ThriveKid.API
             builder.Services.AddScoped<IChildService, ChildService>();
             builder.Services.AddScoped<IMilestoneService, MilestoneService>();
             builder.Services.AddScoped<IFeedingLogService, FeedingLogService>();
-            builder.Services.AddScoped<ISleepLogService, SleepLogService>();
+
+            // Register the SleepLogService for dependency injection
+            builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
             // Register the DbContext with the service container
             var app = builder.Build();

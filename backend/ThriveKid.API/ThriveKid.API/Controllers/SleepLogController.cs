@@ -3,19 +3,18 @@ using ThriveKid.API.DTOs.SleepLogs;
 using ThriveKid.API.Services.Interfaces;
 
 namespace ThriveKid.API.Controllers
-
-/*
- | Endpoint             | Method | Purpose                 |
-| -------------------- | ------ | ----------------------- |
-| `/api/SleepLog`      | GET    | Get all sleep logs      |
-| `/api/SleepLog/{id}` | GET    | Get one sleep log by ID |
-| `/api/SleepLog`      | POST   | Create new sleep log    |
-| `/api/SleepLog/{id}` | PUT    | Update sleep log        |
-| `/api/SleepLog/{id}` | DELETE | Delete sleep log        |
-
-*/
-
 {
+    /*
+     | Endpoint             | Method | Purpose                 |
+    | -------------------- | ------ | ----------------------- |
+    | `/api/SleepLog`      | GET    | Get all sleep logs      |
+    | `/api/SleepLog/{id}` | GET    | Get one sleep log by ID |
+    | `/api/SleepLog`      | POST   | Create new sleep log    |
+    | `/api/SleepLog/{id}` | PUT    | Update sleep log        |
+    | `/api/SleepLog/{id}` | DELETE | Delete sleep log        |
+
+    */
+
     [ApiController]
     [Route("api/[controller]")]
     public class SleepLogController : ControllerBase

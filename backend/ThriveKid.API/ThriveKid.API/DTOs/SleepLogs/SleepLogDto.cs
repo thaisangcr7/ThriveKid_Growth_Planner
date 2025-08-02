@@ -8,5 +8,8 @@
         public string Notes { get; set; }
         public int ChildId { get; set; }
         public string ChildName { get; set; } // from navigation
+
+        public double SleepDurationHours { get; set; }
+
     }
 }

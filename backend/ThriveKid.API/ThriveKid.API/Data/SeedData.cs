@@ -1,20 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ThriveKid.API.Models;
 using ThriveKid.API.Data;
-using ThriveKid.API.Services;
-using System;
+using ThriveKid.API.Models;
 
-// This class seeds initial data into the database
-// It is called during application startup to ensure the database has some initial data
-// This is useful for development and testing purposes
-
-namespace ThriveKid.API.Data
+namespace ThriveKid.API
 {
     public static class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using var context = serviceProvider.GetRequiredService<ThriveKidContext>(); // ✅ correct correct
+            using var context = new ThriveKidContext(
+                serviceProvider.GetRequiredService<DbContextOptions<ThriveKidContext>>());
+
             // Prevent reseeding
             if (context.Children.Any()) return;
 
@@ -78,6 +74,34 @@ namespace ThriveKid.API.Data
             );
 
             context.SaveChanges();
+            // ✅ Correct: calling the private method
+            SeedSleepLogs(context, emma.Id);
+
+        }
+        private static void SeedSleepLogs(ThriveKidContext context, int childId)
+        {
+            if (context.SleepLogs.Any()) return;
+
+            context.SleepLogs.AddRange(
+                new SleepLog
+                {
+                    StartTime = DateTime.Now.AddHours(-6),
+                    EndTime = DateTime.Now.AddHours(-4),
+                    Notes = "Afternoon nap after playtime.",
+                    ChildId = childId
+                },
+                new SleepLog
+                {
+                    StartTime = DateTime.Now.AddDays(-1).AddHours(-9),
+                    EndTime = DateTime.Now.AddDays(-1).AddHours(-6),
+                    Notes = "Night sleep, uninterrupted.",
+                    ChildId = childId
+                }
+            );
+
+            context.SaveChanges();
+
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Models;
+using ThriveKid.API.Data;
 
 namespace ThriveKid.API.Data
 {
@@ -16,6 +17,7 @@ namespace ThriveKid.API.Data
 
         public DbSet<SleepLog> SleepLogs { get; set; }
 
+        public DbSet<Reminder> Reminders { get; set; }
 
     }
 }

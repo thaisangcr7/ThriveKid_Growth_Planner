@@ -4,7 +4,7 @@ using ThriveKid.API.DTOs.SleepLogs;
 using ThriveKid.API.Models;
 using ThriveKid.API.Services.Interfaces;
 
-namespace ThriveKid.API.Services.Implementations
+namespace ThriveKid.API.Services
 {
     public class SleepLogService : ISleepLogService
     {
@@ -15,47 +15,50 @@ namespace ThriveKid.API.Services.Implementations
             _context = context;
         }
 
+        // Get all sleep logs and include child's full name
         public async Task<IEnumerable<SleepLogDto>> GetAllSleepLogsAsync()
         {
-            return await _context.SleepLogs
-                .Include(sl => sl.Child)
-                .Select(sl => new SleepLogDto
-                {
-                    Id = sl.Id,
-                    StartTime = sl.SleepStart,
-                    EndTime = sl.SleepEnd,
-                    Notes = sl.Notes,
-                    ChildId = sl.ChildId,
-                    ChildName = sl.Child.FirstName + " " + sl.Child.LastName
-                })
-                .ToListAsync();
+            var sleepLogs = await _context.SleepLogs.Include(sl => sl.Child).ToListAsync();
+
+            return sleepLogs.Select(sl => new SleepLogDto
+            {
+                Id = sl.Id,
+                StartTime = sl.StartTime,
+                EndTime = sl.EndTime,
+                Notes = sl.Notes ?? "",
+                ChildId = sl.ChildId,
+                ChildName = sl.Child != null ? sl.Child.FirstName + " " + sl.Child.LastName : "Unknown",
+                SleepDurationHours = (sl.EndTime - sl.StartTime).TotalHours
+            });
         }
 
+
+        // Get a single sleep log by ID
         public async Task<SleepLogDto?> GetSleepLogByIdAsync(int id)
         {
-            var sl = await _context.SleepLogs
-                .Include(sl => sl.Child)
-                .FirstOrDefaultAsync(sl => sl.Id == id);
-
+            var sl = await _context.SleepLogs.Include(sl => sl.Child).FirstOrDefaultAsync(sl => sl.Id == id);
             if (sl == null) return null;
 
             return new SleepLogDto
             {
                 Id = sl.Id,
-                StartTime = sl.SleepStart,
-                EndTime = sl.SleepEnd,
-                Notes = sl.Notes,
+                StartTime = sl.StartTime,
+                EndTime = sl.EndTime,
+                Notes = sl.Notes ?? "",
                 ChildId = sl.ChildId,
-                ChildName = sl.Child.FirstName + " " + sl.Child.LastName
+                ChildName = sl.Child != null ? sl.Child.FirstName + " " + sl.Child.LastName : "Unknown",
+                SleepDurationHours = (sl.EndTime - sl.StartTime).TotalHours
             };
         }
 
+
+        // Create a new sleep log
         public async Task<SleepLogDto> CreateSleepLogAsync(CreateSleepLogDto dto)
         {
             var sleepLog = new SleepLog
             {
-                SleepStart = dto.StartTime,
-                SleepEnd = dto.EndTime,
+                StartTime = dto.StartTime,
+                EndTime = dto.EndTime,
                 Notes = dto.Notes,
                 ChildId = dto.ChildId
             };
@@ -63,33 +66,37 @@ namespace ThriveKid.API.Services.Implementations
             _context.SleepLogs.Add(sleepLog);
             await _context.SaveChangesAsync();
 
-            // Load child name after save
+            // Load child info to return full DTO
             var child = await _context.Children.FindAsync(dto.ChildId);
 
             return new SleepLogDto
             {
                 Id = sleepLog.Id,
-                StartTime = sleepLog.SleepStart,
-                EndTime = sleepLog.SleepEnd,
-                Notes = sleepLog.Notes,
+                StartTime = sleepLog.StartTime,
+                EndTime = sleepLog.EndTime,
+                Notes = sleepLog.Notes ?? "",
                 ChildId = sleepLog.ChildId,
-                ChildName = child != null ? child.FirstName + " " + child.LastName : ""
+                ChildName = child.FirstName + " " + child.LastName,
+                SleepDurationHours = (sleepLog.EndTime - sleepLog.StartTime).TotalHours
             };
+
         }
 
+        // Update existing sleep log
         public async Task<bool> UpdateSleepLogAsync(int id, UpdateSleepLogDto dto)
         {
             var sleepLog = await _context.SleepLogs.FindAsync(id);
             if (sleepLog == null) return false;
 
-            sleepLog.SleepStart = dto.StartTime;
-            sleepLog.SleepEnd = dto.EndTime;
+            sleepLog.StartTime = dto.StartTime;
+            sleepLog.EndTime = dto.EndTime;
             sleepLog.Notes = dto.Notes;
 
             await _context.SaveChangesAsync();
             return true;
         }
 
+        // Delete sleep log
         public async Task<bool> DeleteSleepLogAsync(int id)
         {
             var sleepLog = await _context.SleepLogs.FindAsync(id);

@@ -9,10 +9,10 @@ namespace ThriveKid.API.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime SleepStart { get; set; }
+        public DateTime StartTime { get; set; } 
 
         [Required]
-        public DateTime SleepEnd { get; set; }
+        public DateTime EndTime { get; set; }
 
         public string Notes { get; set; }
 
@@ -21,5 +21,9 @@ namespace ThriveKid.API.Models
 
         [ForeignKey("ChildId")]
         public Child Child { get; set; }
+
+        [NotMapped]
+        public TimeSpan SleepDuration => EndTime - StartTime;
+
     }
 }
