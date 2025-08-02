@@ -82,7 +82,7 @@ namespace ThriveKid.API.Services
 
         }
 
-        // Update existing sleep log
+        // Update existing sleep logs
         public async Task<bool> UpdateSleepLogAsync(int id, UpdateSleepLogDto dto)
         {
             var sleepLog = await _context.SleepLogs.FindAsync(id);
