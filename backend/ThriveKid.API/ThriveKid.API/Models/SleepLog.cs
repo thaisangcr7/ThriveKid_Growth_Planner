@@ -22,6 +22,8 @@ namespace ThriveKid.API.Models
         [ForeignKey("ChildId")]
         public Child Child { get; set; }
 
+        public double SleepDurationHours { get; set; }
+
         [NotMapped]
         public TimeSpan SleepDuration => EndTime - StartTime;
 
