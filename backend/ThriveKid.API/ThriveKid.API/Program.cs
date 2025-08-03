@@ -34,6 +34,8 @@ namespace ThriveKid.API
             builder.Services.AddScoped<IMilestoneService, MilestoneService>();
             builder.Services.AddScoped<IFeedingLogService, FeedingLogService>();
             builder.Services.AddScoped<ISleepLogService, SleepLogService>();
+            builder.Services.AddScoped<IReminderService, ReminderService>();
+
 
             // Register the SleepLogService for dependency injection
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
