@@ -19,5 +19,7 @@ namespace ThriveKid.API.Data
 
         public DbSet<Reminder> Reminders { get; set; }
 
+        public DbSet<LearningGoal> LearningGoals { get; set; }
+
     }
 }

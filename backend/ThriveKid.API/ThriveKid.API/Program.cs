@@ -1,5 +1,6 @@
 ﻿
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using ThriveKid.API.Data;
 using ThriveKid.API.Services.Implementations;
@@ -35,9 +36,9 @@ namespace ThriveKid.API
             builder.Services.AddScoped<IFeedingLogService, FeedingLogService>();
             builder.Services.AddScoped<ISleepLogService, SleepLogService>();
             builder.Services.AddScoped<IReminderService, ReminderService>();
+            builder.Services.AddScoped<ILearningGoalService, LearningGoalService>();
 
-
-            // Register the SleepLogService for dependency injection
+            // Register all FluentValidation validators from this assembly
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
             // Register the DbContext with the service container

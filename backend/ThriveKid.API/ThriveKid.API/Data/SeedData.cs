@@ -119,7 +119,7 @@ namespace ThriveKid.API
             if (!context.Reminders.Any())
             {
                 var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
-                if (emma != null)
+                if (emma != null)   
                 {
                     context.Reminders.AddRange(
                         new Reminder
@@ -140,6 +140,32 @@ namespace ThriveKid.API
                     context.SaveChanges();
                 }
             }
+            // Seed LearningGoals if missing
+            // STEP 5 – Seed LearningGoals using actual child IDs
+            if (!context.LearningGoals.Any())
+            {
+                // Re-query children to get their generated IDs
+                var emma = context.Children.First(c => c.FirstName == "Emma");
+                var liam = context.Children.First(c => c.FirstName == "Liam");
+
+                context.LearningGoals.AddRange(
+                    new LearningGoal
+                    {
+                        Title = "Learn to stack blocks",
+                        IsCompleted = false,
+                        ChildId = emma.Id
+                    },
+                    new LearningGoal
+                    {
+                        Title = "Recognize colors",
+                        IsCompleted = false,
+                        ChildId = liam.Id
+                    }
+                );
+                context.SaveChanges();
+            }
+
+            
         }
     }
 }
