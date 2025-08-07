@@ -119,7 +119,7 @@ namespace ThriveKid.API
             if (!context.Reminders.Any())
             {
                 var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
-                if (emma != null)   
+                if (emma != null)
                 {
                     context.Reminders.AddRange(
                         new Reminder
@@ -164,7 +164,49 @@ namespace ThriveKid.API
                 );
                 context.SaveChanges();
             }
+            // Seed ToyRecommendations if missing
+            // ✅ Add Toy Suggestions only if none exist
+            if (!context.ToyRecommendations.Any())
+            {
+                var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
+                var liam = context.Children.FirstOrDefault(c => c.FirstName == "Liam");
 
+                if (emma != null && liam != null)
+                {
+                    context.ToyRecommendations.AddRange(
+                        new ToyRecommendation
+                        {
+                            ToyName = "Soft Rattle",
+                            RecommendedAgeInMonths = 3,
+                            Category = "Sensory",
+                            ChildId = emma.Id
+                        },
+                        new ToyRecommendation
+                        {
+                            ToyName = "Stacking Cups",
+                            RecommendedAgeInMonths = 9,
+                            Category = "Motor Skills",
+                            ChildId = emma.Id
+                        },
+                        new ToyRecommendation
+                        {
+                            ToyName = "Shape Sorter",
+                            RecommendedAgeInMonths = 12,
+                            Category = "Cognitive",
+                            ChildId = liam.Id
+                        },
+                        new ToyRecommendation
+                        {
+                            ToyName = "Push Walker",
+                            RecommendedAgeInMonths = 10,
+                            Category = "Gross Motor",
+                            ChildId = liam.Id
+                        }
+                    );
+
+                    context.SaveChanges();
+                }
+            }
             
         }
     }

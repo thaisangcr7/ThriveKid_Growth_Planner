@@ -37,6 +37,7 @@ namespace ThriveKid.API
             builder.Services.AddScoped<ISleepLogService, SleepLogService>();
             builder.Services.AddScoped<IReminderService, ReminderService>();
             builder.Services.AddScoped<ILearningGoalService, LearningGoalService>();
+            builder.Services.AddScoped<IToyRecommendationService, ToyRecommendationService>();
 
             // Register all FluentValidation validators from this assembly
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
