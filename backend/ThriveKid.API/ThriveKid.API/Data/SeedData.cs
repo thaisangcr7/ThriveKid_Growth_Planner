@@ -116,30 +116,29 @@ namespace ThriveKid.API
             }
 
             // Seed Reminders if missing
+            // ✅ Add Reminders only if none exist
+            // This ensures we don't duplicate reminders on each app start
+
             if (!context.Reminders.Any())
             {
                 var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
                 if (emma != null)
                 {
-                    context.Reminders.AddRange(
-                        new Reminder
-                        {
-                            Title = "Pediatrician Checkup",
-                            ReminderTime = DateTime.Now.AddDays(7).AddHours(10),
-                            Notes = "Bring immunization record.",
-                            ChildId = emma.Id
-                        },
-                        new Reminder
-                        {
-                            Title = "Morning Nap Reminder",
-                            ReminderTime = DateTime.Now.AddHours(2),
-                            Notes = "Try rocking her to sleep by 10 AM.",
-                            ChildId = emma.Id
-                        }
-                    );
+                    context.Reminders.Add(new Reminder
+                    {
+                        ChildId = emma.Id,
+                        Title = "Vitamin D drop",
+                        Notes = "Once daily",
+                        DueAt = DateTime.UtcNow.AddMinutes(1),
+                        RepeatRule = RepeatRule.DAILY,
+                        NextRunAt = DateTime.UtcNow.AddMinutes(1),
+                        IsCompleted = false,
+                        Source = ReminderSource.Manual
+                    });
                     context.SaveChanges();
                 }
             }
+
             // Seed LearningGoals if missing
             // STEP 5 – Seed LearningGoals using actual child IDs
             if (!context.LearningGoals.Any())

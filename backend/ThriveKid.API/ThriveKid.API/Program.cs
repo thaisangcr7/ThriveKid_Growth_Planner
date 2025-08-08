@@ -7,7 +7,7 @@ using ThriveKid.API.Services.Implementations;
 using ThriveKid.API.Services.Interfaces;
 using ThriveKid.API.Models;
 using ThriveKid.API.Services;
-
+using ThriveKid.API.Services.Engines;
 
 namespace ThriveKid.API
 {
@@ -41,6 +41,7 @@ namespace ThriveKid.API
 
             // Register all FluentValidation validators from this assembly
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+            builder.Services.AddHostedService<ReminderEngine>();
 
             // Register the DbContext with the service container
             var app = builder.Build();

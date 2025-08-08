@@ -1,17 +1,17 @@
 ﻿using FluentValidation;
 using ThriveKid.API.DTOs.Reminders;
 
-namespace ThriveKid.API.Validators.Reminders;
-
-public class UpdateReminderDtoValidator : AbstractValidator<UpdateReminderDto>
+namespace ThriveKid.API.Validators.Reminders
 {
-    public UpdateReminderDtoValidator()
+    public class UpdateReminderDtoValidator : AbstractValidator<UpdateReminderDto>
     {
-        RuleFor(x => x.Title)
-            .NotEmpty().WithMessage("Title is required.")
-            .MaximumLength(100).WithMessage("Title must be under 100 characters.");
-
-        RuleFor(x => x.ReminderTime)
-            .GreaterThan(DateTime.Now).WithMessage("Reminder time must be in the future.");
+        public UpdateReminderDtoValidator()
+        {
+            RuleFor(x => x.Title).NotEmpty().MaximumLength(120);
+            RuleFor(x => x.DueAt).NotEmpty();
+            RuleFor(x => x.RepeatRule)
+                .Must(v => new[] { "NONE", "DAILY", "WEEKLY", "MONTHLY" }.Contains(v.ToUpper()))
+                .WithMessage("RepeatRule must be NONE, DAILY, WEEKLY, or MONTHLY.");
+        }
     }
 }

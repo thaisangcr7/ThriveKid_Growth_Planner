@@ -2,65 +2,63 @@
 using ThriveKid.API.DTOs.Reminders;
 using ThriveKid.API.Services.Interfaces;
 
-namespace ThriveKid.API.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class ReminderController : ControllerBase
+namespace ThriveKid.API.Controllers
 {
-    private readonly IReminderService _reminderService;
-
-    public ReminderController(IReminderService reminderService)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ReminderController : ControllerBase
     {
-        _reminderService = reminderService;
-    }
+        private readonly IReminderService _reminderService;
 
-    // GET: api/Reminder
-    [HttpGet]
-    public async Task<ActionResult<List<ReminderDto>>> GetAll()
-    {
-        var reminders = await _reminderService.GetAllRemindersAsync();
-        return Ok(reminders);
-    }
+        public ReminderController(IReminderService reminderService)
+        {
+            _reminderService = reminderService;
+        }
 
-    // GET: api/Reminder/{id}
-    [HttpGet("{id}")]
-    public async Task<ActionResult<ReminderDto>> GetById(int id)
-    {
-        var reminder = await _reminderService.GetReminderByIdAsync(id);
-        if (reminder == null)
-            return NotFound();
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var reminders = await _reminderService.GetAllAsync();
+            return Ok(reminders);
+        }
 
-        return Ok(reminder);
-    }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var reminder = await _reminderService.GetByIdAsync(id);
+            if (reminder == null) return NotFound();
+            return Ok(reminder);
+        }
 
-    // POST: api/Reminder
-    [HttpPost]
-    public async Task<ActionResult<ReminderDto>> Create(CreateReminderDto dto)
-    {
-        var created = await _reminderService.CreateReminderAsync(dto);
-        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
-    }
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateReminderDto dto)
+        {
+            var created = await _reminderService.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+        }
 
-    // PUT: api/Reminder/{id}
-    [HttpPut("{id}")]
-    public async Task<ActionResult<ReminderDto>> Update(int id, UpdateReminderDto dto)
-    {
-        var updated = await _reminderService.UpdateReminderAsync(id, dto);
-        if (updated == null)
-            return NotFound();
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UpdateReminderDto dto)
+        {
+            var updated = await _reminderService.UpdateAsync(id, dto);
+            if (!updated) return NotFound();
+            return NoContent();
+        }
 
-        return Ok(updated);
-    }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleted = await _reminderService.DeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
+        }
 
-    // DELETE: api/Reminder/{id}
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
-    {
-        var deleted = await _reminderService.DeleteReminderAsync(id);
-        if (!deleted)
-            return NotFound();
-
-        return NoContent();
+        [HttpPatch("{id}/completed")]
+        public async Task<IActionResult> SetCompleted(int id, [FromQuery] bool isCompleted)
+        {
+            var result = await _reminderService.SetCompletedAsync(id, isCompleted);
+            if (!result) return NotFound();
+            return NoContent();
+        }
     }
 }

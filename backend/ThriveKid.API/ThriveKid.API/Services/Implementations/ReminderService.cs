@@ -4,110 +4,143 @@ using ThriveKid.API.DTOs.Reminders;
 using ThriveKid.API.Models;
 using ThriveKid.API.Services.Interfaces;
 
-namespace ThriveKid.API.Services.Implementations;
-
-public class ReminderService : IReminderService
+namespace ThriveKid.API.Services.Implementations
 {
-    private readonly ThriveKidContext _context;
-
-    public ReminderService(ThriveKidContext context)
+    public class ReminderService : IReminderService
     {
-        _context = context;
-    }
+        private readonly ThriveKidContext _context;
 
-    public async Task<List<ReminderDto>> GetAllRemindersAsync()
-    {
-        return await _context.Reminders
-            .Include(r => r.Child)
-            .Select(r => new ReminderDto
+        public ReminderService(ThriveKidContext context) => _context = context;
+
+        public async Task<IEnumerable<ReminderDto>> GetAllAsync()
+        {
+            return await _context.Reminders
+                .Include(r => r.Child)
+                .Select(r => new ReminderDto
+                {
+                    Id = r.Id,
+                    ChildId = r.ChildId,
+                    ChildName = r.Child != null ? r.Child.FirstName + " " + r.Child.LastName : "",
+                    Title = r.Title,
+                    Notes = r.Notes,
+                    DueAt = r.DueAt,
+                    RepeatRule = r.RepeatRule.ToString(),
+                    IsCompleted = r.IsCompleted,
+                    LastRunAt = r.LastRunAt,
+                    NextRunAt = r.NextRunAt,
+                    Source = r.Source.ToString()
+                })
+                .ToListAsync();
+        }
+
+        public async Task<ReminderDto?> GetByIdAsync(int id)
+        {
+            var r = await _context.Reminders
+                .Include(x => x.Child)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (r == null) return null;
+
+            return new ReminderDto
             {
                 Id = r.Id,
-                Title = r.Title,
-                ReminderTime = r.ReminderTime,
-                Notes = r.Notes,
                 ChildId = r.ChildId,
-                ChildName = r.Child!.FirstName + " " + r.Child.LastName
-            })
-            .ToListAsync();
-    }
+                ChildName = r.Child != null ? r.Child.FirstName + " " + r.Child.LastName : "",
+                Title = r.Title,
+                Notes = r.Notes,
+                DueAt = r.DueAt,
+                RepeatRule = r.RepeatRule.ToString(),
+                IsCompleted = r.IsCompleted,
+                LastRunAt = r.LastRunAt,
+                NextRunAt = r.NextRunAt,
+                Source = r.Source.ToString()
+            };
+        }
 
-    public async Task<ReminderDto?> GetReminderByIdAsync(int id)
-    {
-        var r = await _context.Reminders
-            .Include(r => r.Child)
-            .FirstOrDefaultAsync(r => r.Id == id);
-
-        if (r == null) return null;
-
-        return new ReminderDto
+        public async Task<ReminderDto> CreateAsync(CreateReminderDto dto)
         {
-            Id = r.Id,
-            Title = r.Title,
-            ReminderTime = r.ReminderTime,
-            Notes = r.Notes,
-            ChildId = r.ChildId,
-            ChildName = r.Child!.FirstName + " " + r.Child.LastName
-        };
-    }
+            var rule = ParseRule(dto.RepeatRule);
 
-    public async Task<ReminderDto> CreateReminderAsync(CreateReminderDto dto)
-    {
-        var reminder = new Reminder
+            var dueUtc = DateTime.SpecifyKind(dto.DueAt, DateTimeKind.Utc);
+
+            var entity = new Reminder
+            {
+                ChildId = dto.ChildId,
+                Title = dto.Title,
+                Notes = dto.Notes,
+                DueAt = dueUtc,
+                RepeatRule = rule,
+
+                // engine bookkeeping
+                IsCompleted = false,
+                LastRunAt = null,
+
+                // 👇 First run should be at DueAt so the engine will pick it up
+                NextRunAt = dueUtc,
+
+                Source = ReminderSource.Manual
+            };
+
+            _context.Reminders.Add(entity);
+            await _context.SaveChangesAsync();
+
+            // return fully projected DTO
+            return (await GetByIdAsync(entity.Id))!;
+        }
+
+        public async Task<bool> UpdateAsync(int id, UpdateReminderDto dto)
         {
-            Title = dto.Title,
-            ReminderTime = dto.ReminderTime,
-            Notes = dto.Notes,
-            ChildId = dto.ChildId
-        };
+            var r = await _context.Reminders.FindAsync(id);
+            if (r == null) return false;
 
-        _context.Reminders.Add(reminder);
-        await _context.SaveChangesAsync();
+            r.Title = dto.Title;
+            r.Notes = dto.Notes;
+            r.DueAt = DateTime.SpecifyKind(dto.DueAt, DateTimeKind.Utc);
+            r.RepeatRule = ParseRule(dto.RepeatRule);
+            r.IsCompleted = dto.IsCompleted;
 
-        var child = await _context.Children.FindAsync(reminder.ChildId);
+            // 👇 When user changes due/recurrence, schedule next run at new DueAt
+            r.NextRunAt = r.DueAt;
 
-        return new ReminderDto
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
         {
-            Id = reminder.Id,
-            Title = reminder.Title,
-            ReminderTime = reminder.ReminderTime,
-            Notes = reminder.Notes,
-            ChildId = reminder.ChildId,
-            ChildName = child != null ? child.FirstName + " " + child.LastName : ""
-        };
-    }
+            var r = await _context.Reminders.FindAsync(id);
+            if (r == null) return false;
 
-    public async Task<ReminderDto?> UpdateReminderAsync(int id, UpdateReminderDto dto)
-    {
-        var reminder = await _context.Reminders.FindAsync(id);
-        if (reminder == null) return null;
+            _context.Reminders.Remove(r);
+            await _context.SaveChangesAsync();
+            return true;
+        }
 
-        reminder.Title = dto.Title;
-        reminder.ReminderTime = dto.ReminderTime;
-        reminder.Notes = dto.Notes;
-
-        await _context.SaveChangesAsync();
-
-        var child = await _context.Children.FindAsync(reminder.ChildId);
-
-        return new ReminderDto
+        public async Task<bool> SetCompletedAsync(int id, bool isCompleted)
         {
-            Id = reminder.Id,
-            Title = reminder.Title,
-            ReminderTime = reminder.ReminderTime,
-            Notes = reminder.Notes,
-            ChildId = reminder.ChildId,
-            ChildName = child != null ? child.FirstName + " " + child.LastName : ""
-        };
-    }
+            var r = await _context.Reminders.FindAsync(id);
+            if (r == null) return false;
 
-    public async Task<bool> DeleteReminderAsync(int id)
-    {
-        var reminder = await _context.Reminders.FindAsync(id);
-        if (reminder == null) return false;
+            r.IsCompleted = isCompleted;
+            await _context.SaveChangesAsync();
+            return true;
+        }
 
-        _context.Reminders.Remove(reminder);
-        await _context.SaveChangesAsync();
+        // Still useful for tests or if you ever want precompute behavior
+        public DateTime? ComputeNextRun(DateTime fromUtc, string repeatRule)
+        {
+            var utc = DateTime.SpecifyKind(fromUtc, DateTimeKind.Utc);
+            switch (ParseRule(repeatRule))
+            {
+                case RepeatRule.NONE:    return utc;            // first fire at DueAt
+                case RepeatRule.DAILY:   return utc.AddDays(1);
+                case RepeatRule.WEEKLY:  return utc.AddDays(7);
+                case RepeatRule.MONTHLY: return utc.AddMonths(1);
+                default: return utc;
+            }
+        }
 
-        return true;
+        private static RepeatRule ParseRule(string rule)
+            => Enum.TryParse<RepeatRule>(rule, true, out var rr) ? rr : RepeatRule.NONE;
     }
 }
