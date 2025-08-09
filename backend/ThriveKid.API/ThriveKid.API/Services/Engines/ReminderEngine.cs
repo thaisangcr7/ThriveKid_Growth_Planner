@@ -1,23 +1,25 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using ThriveKid.API.Data;
-using ThriveKid.API.Models;
-using ThriveKid.API.Services.Engines.AgeRules;
+using Microsoft.EntityFrameworkCore; // For database access
+using Microsoft.Extensions.Hosting;  // For BackgroundService base class
+using ThriveKid.API.Data;            // For ThriveKidContext (EF Core DB context)
+using ThriveKid.API.Models;          // For Reminder, RepeatRule, etc.
+using ThriveKid.API.Services.Engines.AgeRules; // For age-based reminder rules
 
 namespace ThriveKid.API.Services.Engines
 {
+    // ReminderEngine runs as a background service in your app
     public class ReminderEngine : BackgroundService
     {
-        private readonly IServiceProvider _services;
+        private readonly IServiceProvider _services; // Used to create scoped services (like DB context)
 
-        // Poll every 60s
+        // How often to poll for due reminders (every 60 seconds)
         private readonly TimeSpan _pollInterval = TimeSpan.FromSeconds(60);
 
-        // Run age-based rules daily at 2:00 AM Eastern (handles EST/EDT automatically)
+        // When to run age-based rules daily (2:00 AM Eastern)
         private readonly TimeSpan _dailyRuleTimeEST = new(2, 0, 0);
 
         public ReminderEngine(IServiceProvider services) => _services = services;
 
+        // Main loop: runs until the app shuts down
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var dailyRuleAnchor = EasternTodayAt(_dailyRuleTimeEST);
@@ -26,37 +28,41 @@ namespace ThriveKid.API.Services.Engines
             {
                 var nowUtc = DateTime.UtcNow;
 
+                // Process reminders that are due
                 await ProcessDueReminders(nowUtc, stoppingToken);
 
-                // Apply age-based rules once per day after the Eastern anchor time
+                // Run age-based rules once per day after the anchor time
                 if (nowUtc >= dailyRuleAnchor)
                 {
                     await ApplyAgeBasedReminders(nowUtc, stoppingToken);
                     dailyRuleAnchor = EasternTodayAt(_dailyRuleTimeEST).AddDays(1);
                 }
 
+                // Wait for the next poll interval, or exit if shutting down
                 try { await Task.Delay(_pollInterval, stoppingToken); }
                 catch (TaskCanceledException) { /* shutting down */ }
             }
         }
 
         /// <summary>
-        /// Convert "today at {time} in Eastern" to UTC, handling DST.
+        /// Gets today's date at a specific time in Eastern Time, converted to UTC.
+        /// Handles daylight saving time.
         /// </summary>
         private static DateTime EasternTodayAt(TimeSpan time)
         {
             var eastern = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
             var easternNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, eastern);
-            var easternTodayAt = easternNow.Date.Add(time);                 // today 02:00 in Eastern
-            return TimeZoneInfo.ConvertTimeToUtc(easternTodayAt, eastern);  // convert to UTC anchor
+            var easternTodayAt = easternNow.Date.Add(time);
+            return TimeZoneInfo.ConvertTimeToUtc(easternTodayAt, eastern);
         }
 
+        // Finds and processes reminders that are due to run
         private async Task ProcessDueReminders(DateTime nowUtc, CancellationToken ct)
         {
             using var scope = _services.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<ThriveKidContext>();
 
-            // Find due + not completed
+            // Find reminders that are due and not completed
             var dues = await db.Reminders
                 .Where(r => !r.IsCompleted && r.NextRunAt != null && r.NextRunAt <= nowUtc)
                 .ToListAsync(ct);
@@ -65,10 +71,10 @@ namespace ThriveKid.API.Services.Engines
 
             foreach (var r in dues)
             {
-                // mark this execution
+                // Mark as run
                 r.LastRunAt = nowUtc;
 
-                // compute next occurrence
+                // Calculate next run time based on repeat rule
                 DateTime? next = r.RepeatRule switch
                 {
                     RepeatRule.NONE    => null,                      // one-shot
@@ -80,20 +86,20 @@ namespace ThriveKid.API.Services.Engines
 
                 if (r.RepeatRule == RepeatRule.NONE)
                 {
-                    // ✅ complete one-shots
+                    // Mark one-shot reminders as completed
                     r.IsCompleted = true;
                     r.NextRunAt = null;
                 }
                 else
                 {
-                    // drift guard: never schedule in the past
+                    // Prevent scheduling in the past
                     if (next != null && next <= nowUtc)
                         next = nowUtc.AddSeconds(1);
 
                     r.NextRunAt = next;
                 }
 
-                // (optional) console log for visibility during testing
+                // Log for debugging
                 Console.WriteLine(
                     $"[ReminderEngine] Ran ID={r.Id}, Title='{r.Title}', ChildId={r.ChildId}, " +
                     $"Repeat={r.RepeatRule}, LastRunAt={r.LastRunAt:O}, NextRunAt={(r.NextRunAt?.ToString("O") ?? "null")}");
@@ -102,6 +108,7 @@ namespace ThriveKid.API.Services.Engines
             await db.SaveChangesAsync(ct);
         }
 
+        // Applies age-based reminder rules for each child, once per day
         private async Task ApplyAgeBasedReminders(DateTime nowUtc, CancellationToken ct)
         {
             using var scope = _services.CreateScope();
@@ -115,7 +122,7 @@ namespace ThriveKid.API.Services.Engines
 
                 foreach (var s in suggestions)
                 {
-                    // de-dupe: skip if same title auto-created in last 7 days
+                    // Skip if a similar reminder was auto-created in the last 7 days
                     var sevenDaysAgo = nowUtc.AddDays(-7);
                     var exists = await db.Reminders.AnyAsync(r =>
                         r.ChildId == c.Id &&
@@ -147,6 +154,7 @@ namespace ThriveKid.API.Services.Engines
             await db.SaveChangesAsync(ct);
         }
 
+        // Helper: calculates the number of months between two dates
         private static int MonthsBetween(DateTime dob, DateTime utcNow)
         {
             var a = new DateTime(dob.Year, dob.Month, 1);

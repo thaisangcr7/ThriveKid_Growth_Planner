@@ -1,17 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ThriveKid.API.Data;
-using ThriveKid.API.Models;
+﻿using Microsoft.EntityFrameworkCore; // Enables EF Core DB operations
+using ThriveKid.API.Data;            // For ThriveKidContext (your DB context)
+using ThriveKid.API.Models;          // For your entity models
 
 namespace ThriveKid.API
 {
+    // Static class for seeding initial data into the database
     public static class SeedData
     {
+        // Call this method at app startup to ensure the DB has sample data
         public static void Initialize(IServiceProvider serviceProvider)
         {
+            // Create a new DB context using dependency injection
             using var context = new ThriveKidContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ThriveKidContext>>());
 
-            // Seed Children if missing
+            // --- Seed Children ---
+            // Only add children if the table is empty
             if (!context.Children.Any())
             {
                 var emma = new Child
@@ -33,10 +37,11 @@ namespace ThriveKid.API
                 };
 
                 context.Children.AddRange(emma, liam);
-                context.SaveChanges();
+                context.SaveChanges(); // Save to generate IDs for later use
             }
 
-            // Seed Milestones if missing
+            // --- Seed Milestones ---
+            // Only add milestones if the table is empty
             if (!context.Milestones.Any())
             {
                 var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
@@ -48,7 +53,7 @@ namespace ThriveKid.API
                             Title = "First smile",
                             Notes = "She smiled during bath time.",
                             AchievedDate = new DateTime(2024, 1, 10),
-                            ChildId = emma.Id
+                            ChildId = emma.Id // Link to Emma
                         },
                         new Milestone
                         {
@@ -62,7 +67,8 @@ namespace ThriveKid.API
                 }
             }
 
-            // Seed FeedingLogs if missing
+            // --- Seed FeedingLogs ---
+            // Only add feeding logs if the table is empty
             if (!context.FeedingLogs.Any())
             {
                 var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
@@ -88,7 +94,8 @@ namespace ThriveKid.API
                 }
             }
 
-            // Seed SleepLogs if missing
+            // --- Seed SleepLogs ---
+            // Only add sleep logs if the table is empty
             if (!context.SleepLogs.Any())
             {
                 var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
@@ -115,10 +122,8 @@ namespace ThriveKid.API
                 }
             }
 
-            // Seed Reminders if missing
-            // ✅ Add Reminders only if none exist
-            // This ensures we don't duplicate reminders on each app start
-
+            // --- Seed Reminders ---
+            // Only add reminders if the table is empty
             if (!context.Reminders.Any())
             {
                 var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
@@ -139,8 +144,8 @@ namespace ThriveKid.API
                 }
             }
 
-            // Seed LearningGoals if missing
-            // STEP 5 – Seed LearningGoals using actual child IDs
+            // --- Seed LearningGoals ---
+            // Only add learning goals if the table is empty
             if (!context.LearningGoals.Any())
             {
                 // Re-query children to get their generated IDs
@@ -163,8 +168,9 @@ namespace ThriveKid.API
                 );
                 context.SaveChanges();
             }
-            // Seed ToyRecommendations if missing
-            // ✅ Add Toy Suggestions only if none exist
+
+            // --- Seed ToyRecommendations ---
+            // Only add toy recommendations if the table is empty
             if (!context.ToyRecommendations.Any())
             {
                 var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
@@ -206,7 +212,6 @@ namespace ThriveKid.API
                     context.SaveChanges();
                 }
             }
-            
         }
     }
 }

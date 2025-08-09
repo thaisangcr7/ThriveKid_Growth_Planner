@@ -1,24 +1,26 @@
-using Microsoft.EntityFrameworkCore;
-using ThriveKid.API.Data;
-using ThriveKid.API.DTOs.ToyRecommendations;
-using ThriveKid.API.Models;
-using ThriveKid.API.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;                  // For async DB operations and Include
+using ThriveKid.API.Data;                             // For ThriveKidContext (EF Core DB context)
+using ThriveKid.API.DTOs.ToyRecommendations;          // For ToyRecommendationDto, CreateToyRecommendationDto, UpdateToyRecommendationDto
+using ThriveKid.API.Models;                           // For ToyRecommendation entity
+using ThriveKid.API.Services.Interfaces;              // For IToyRecommendationService interface
 
 namespace ThriveKid.API.Services.Implementations
 {
+    // Implements business logic and data access for toy recommendations
     public class ToyRecommendationService : IToyRecommendationService
     {
-        private readonly ThriveKidContext _context;
+        private readonly ThriveKidContext _context;   // EF Core DB context
 
         public ToyRecommendationService(ThriveKidContext context)
         {
             _context = context;
         }
 
+        // Returns all toy recommendations, including child info, as DTOs
         public async Task<IEnumerable<ToyRecommendationDto>> GetAllToyRecommendationsAsync()
         {
             return await _context.ToyRecommendations
-                .Include(t => t.Child)
+                .Include(t => t.Child) // Eager-load child info
                 .Select(t => new ToyRecommendationDto
                 {
                     Id = t.Id,
@@ -31,6 +33,7 @@ namespace ThriveKid.API.Services.Implementations
                 .ToListAsync();
         }
 
+        // Returns a single toy recommendation by ID, or null if not found
         public async Task<ToyRecommendationDto?> GetToyRecommendationByIdAsync(int id)
         {
             var toy = await _context.ToyRecommendations
@@ -51,6 +54,7 @@ namespace ThriveKid.API.Services.Implementations
             };
         }
 
+        // Creates a new toy recommendation and returns the DTO (with child info)
         public async Task<ToyRecommendationDto> CreateToyRecommendationAsync(CreateToyRecommendationDto dto)
         {
             var toy = new ToyRecommendation
@@ -78,6 +82,7 @@ namespace ThriveKid.API.Services.Implementations
             };
         }
 
+        // Updates an existing toy recommendation; returns true if successful
         public async Task<bool> UpdateToyRecommendationAsync(int id, UpdateToyRecommendationDto dto)
         {
             var toy = await _context.ToyRecommendations.FindAsync(id);
@@ -92,6 +97,7 @@ namespace ThriveKid.API.Services.Implementations
             return true;
         }
 
+        // Deletes a toy recommendation by ID; returns true if successful
         public async Task<bool> DeleteToyRecommendationAsync(int id)
         {
             var toy = await _context.ToyRecommendations.FindAsync(id);

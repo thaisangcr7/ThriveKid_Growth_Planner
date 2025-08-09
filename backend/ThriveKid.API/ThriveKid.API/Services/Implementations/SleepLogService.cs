@@ -1,14 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ThriveKid.API.Data;
-using ThriveKid.API.DTOs.SleepLogs;
-using ThriveKid.API.Models;
-using ThriveKid.API.Services.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;              // For async DB operations and Include
+using ThriveKid.API.Data;                         // For ThriveKidContext (EF Core DB context)
+using ThriveKid.API.DTOs.SleepLogs;               // For SleepLogDto, CreateSleepLogDto, UpdateSleepLogDto
+using ThriveKid.API.Models;                       // For SleepLog entity
+using ThriveKid.API.Services.Interfaces;          // For ISleepLogService interface
 
 namespace ThriveKid.API.Services
 {
+    // Implements business logic and data access for sleep logs
     public class SleepLogService : ISleepLogService
     {
-        private readonly ThriveKidContext _context;
+        private readonly ThriveKidContext _context; // EF Core DB context
 
         public SleepLogService(ThriveKidContext context)
         {
@@ -20,6 +21,7 @@ namespace ThriveKid.API.Services
         {
             var sleepLogs = await _context.SleepLogs.Include(sl => sl.Child).ToListAsync();
 
+            // Project each SleepLog entity to a DTO, including child info and sleep duration
             return sleepLogs.Select(sl => new SleepLogDto
             {
                 Id = sl.Id,
@@ -31,7 +33,6 @@ namespace ThriveKid.API.Services
                 SleepDurationHours = (sl.EndTime - sl.StartTime).TotalHours
             });
         }
-
 
         // Get a single sleep log by ID
         public async Task<SleepLogDto?> GetSleepLogByIdAsync(int id)
@@ -50,7 +51,6 @@ namespace ThriveKid.API.Services
                 SleepDurationHours = (sl.EndTime - sl.StartTime).TotalHours
             };
         }
-
 
         // Create a new sleep log
         public async Task<SleepLogDto> CreateSleepLogAsync(CreateSleepLogDto dto)
@@ -79,7 +79,6 @@ namespace ThriveKid.API.Services
                 ChildName = child.FirstName + " " + child.LastName,
                 SleepDurationHours = (sleepLog.EndTime - sleepLog.StartTime).TotalHours
             };
-
         }
 
         // Update existing sleep logs

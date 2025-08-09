@@ -1,24 +1,26 @@
-using Microsoft.EntityFrameworkCore;
-using ThriveKid.API.Data;
-using ThriveKid.API.DTOs.LearningGoals;
-using ThriveKid.API.Models;
-using ThriveKid.API.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;                  // For async DB operations and Include
+using ThriveKid.API.Data;                             // For ThriveKidContext (EF Core DB context)
+using ThriveKid.API.DTOs.LearningGoals;               // For LearningGoalDto, CreateLearningGoalDto, UpdateLearningGoalDto
+using ThriveKid.API.Models;                           // For LearningGoal entity
+using ThriveKid.API.Services.Interfaces;              // For ILearningGoalService interface
 
 namespace ThriveKid.API.Services.Implementations
 {
+    // Implements business logic and data access for learning goals
     public class LearningGoalService : ILearningGoalService
     {
-        private readonly ThriveKidContext _context;
+        private readonly ThriveKidContext _context;   // EF Core DB context
 
         public LearningGoalService(ThriveKidContext context)
         {
             _context = context;
         }
 
+        // Returns all learning goals, including child info, as DTOs
         public async Task<IEnumerable<LearningGoalDto>> GetAllAsync()
         {
             return await _context.LearningGoals
-                .Include(lg => lg.Child)
+                .Include(lg => lg.Child) // Eager-load child info
                 .Select(lg => new LearningGoalDto
                 {
                     Id = lg.Id,
@@ -31,6 +33,7 @@ namespace ThriveKid.API.Services.Implementations
                 .ToListAsync();
         }
 
+        // Returns a single learning goal by ID, or null if not found
         public async Task<LearningGoalDto?> GetByIdAsync(int id)
         {
             var lg = await _context.LearningGoals
@@ -50,6 +53,7 @@ namespace ThriveKid.API.Services.Implementations
             };
         }
 
+        // Creates a new learning goal and returns the DTO (with child info)
         public async Task<LearningGoalDto> CreateAsync(CreateLearningGoalDto dto)
         {
             var lg = new LearningGoal
@@ -76,6 +80,7 @@ namespace ThriveKid.API.Services.Implementations
             };
         }
 
+        // Updates an existing learning goal; returns updated DTO or null if not found
         public async Task<LearningGoalDto?> UpdateAsync(int id, UpdateLearningGoalDto dto)
         {
             var lg = await _context.LearningGoals.FindAsync(id);
@@ -102,6 +107,7 @@ namespace ThriveKid.API.Services.Implementations
             };
         }
 
+        // Deletes a learning goal by ID; returns true if successful
         public async Task<bool> DeleteAsync(int id)
         {
             var lg = await _context.LearningGoals.FindAsync(id);
