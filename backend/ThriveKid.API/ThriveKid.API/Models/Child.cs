@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ThriveKid.API.Models
 {
@@ -6,25 +7,28 @@ namespace ThriveKid.API.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "First name is required.")]
-        [MaxLength(50, ErrorMessage = "First name must be under 50 characters.")]
-        public string? FirstName { get; set; }
-
-        [Required(ErrorMessage = "Last name is required.")]
-        [MaxLength(50, ErrorMessage = "Last name must be under 50 characters.")]
-        public string? LastName { get; set; }
-
-        [Required(ErrorMessage = "Date of birth is required.")]
+        // core
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName  { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
+        public Gender Gender { get; set; } = Gender.Unknown;
 
-        public string? Gender { get; set; }
+        // computed (not mapped)
+        [NotMapped]
+        public int AgeInMonths => ComputeAgeInMonths(DateOfBirth, DateTime.UtcNow);
 
-        [Range(0, 240, ErrorMessage = "Age in months must be between 0 and 240.")]
-        public int AgeInMonths { get; set; }
+        // navigation (kept but hidden in JSON to avoid cycles)
+        [JsonIgnore] public ICollection<SleepLog> SleepLogs { get; set; } = new List<SleepLog>();
+        [JsonIgnore] public ICollection<FeedingLog> FeedingLogs { get; set; } = new List<FeedingLog>();
+        [JsonIgnore] public ICollection<LearningGoal> LearningGoals { get; set; } = new List<LearningGoal>();
+        [JsonIgnore] public ICollection<ToyRecommendation> ToyRecommendations { get; set; } = new List<ToyRecommendation>();
+        [JsonIgnore] public ICollection<Reminder> Reminders { get; set; } = new List<Reminder>();
 
-        public ICollection<Milestone> Milestones { get; set; } = new List<Milestone>();
-
-        public ICollection<FeedingLog> FeedingLogs { get; set; } = new List<FeedingLog>();
-
+        public static int ComputeAgeInMonths(DateTime dobUtc, DateTime nowUtc)
+        {
+            var a = new DateTime(dobUtc.Year, dobUtc.Month, 1);
+            var b = new DateTime(nowUtc.Year, nowUtc.Month, 1);
+            return ((b.Year - a.Year) * 12) + b.Month - a.Month;
+        }
     }
 }

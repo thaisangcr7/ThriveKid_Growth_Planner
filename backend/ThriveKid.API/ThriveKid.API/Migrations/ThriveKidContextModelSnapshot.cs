@@ -50,23 +50,20 @@ namespace ThriveKid.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AgeInMonths")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasMaxLength(16)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -226,7 +223,7 @@ namespace ThriveKid.API.Migrations
             modelBuilder.Entity("Milestone", b =>
                 {
                     b.HasOne("ThriveKid.API.Models.Child", "Child")
-                        .WithMany("Milestones")
+                        .WithMany()
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -248,7 +245,7 @@ namespace ThriveKid.API.Migrations
             modelBuilder.Entity("ThriveKid.API.Models.LearningGoal", b =>
                 {
                     b.HasOne("ThriveKid.API.Models.Child", "Child")
-                        .WithMany()
+                        .WithMany("LearningGoals")
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -259,7 +256,7 @@ namespace ThriveKid.API.Migrations
             modelBuilder.Entity("ThriveKid.API.Models.Reminder", b =>
                 {
                     b.HasOne("ThriveKid.API.Models.Child", "Child")
-                        .WithMany()
+                        .WithMany("Reminders")
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -270,7 +267,7 @@ namespace ThriveKid.API.Migrations
             modelBuilder.Entity("ThriveKid.API.Models.SleepLog", b =>
                 {
                     b.HasOne("ThriveKid.API.Models.Child", "Child")
-                        .WithMany()
+                        .WithMany("SleepLogs")
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -281,7 +278,7 @@ namespace ThriveKid.API.Migrations
             modelBuilder.Entity("ThriveKid.API.Models.ToyRecommendation", b =>
                 {
                     b.HasOne("ThriveKid.API.Models.Child", "Child")
-                        .WithMany()
+                        .WithMany("ToyRecommendations")
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -293,7 +290,13 @@ namespace ThriveKid.API.Migrations
                 {
                     b.Navigation("FeedingLogs");
 
-                    b.Navigation("Milestones");
+                    b.Navigation("LearningGoals");
+
+                    b.Navigation("Reminders");
+
+                    b.Navigation("SleepLogs");
+
+                    b.Navigation("ToyRecommendations");
                 });
 #pragma warning restore 612, 618
         }

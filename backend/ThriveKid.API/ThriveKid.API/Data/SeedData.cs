@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore; // Enables EF Core DB operations
-using ThriveKid.API.Data;            // For ThriveKidContext (your DB context)
-using ThriveKid.API.Models;          // For your entity models
+﻿using Microsoft.EntityFrameworkCore;
+using ThriveKid.API.Data;
+using ThriveKid.API.Models;
 
 namespace ThriveKid.API
 {
@@ -10,9 +10,11 @@ namespace ThriveKid.API
         // Call this method at app startup to ensure the DB has sample data
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            // Create a new DB context using dependency injection
             using var context = new ThriveKidContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ThriveKidContext>>());
+
+            // Ensure database exists (optional if you always run migrations)
+            // context.Database.EnsureCreated();
 
             // --- Seed Children ---
             // Only add children if the table is empty
@@ -21,196 +23,170 @@ namespace ThriveKid.API
                 var emma = new Child
                 {
                     FirstName = "Emma",
-                    LastName = "Nguyen",
-                    DateOfBirth = new DateTime(2023, 10, 1),
-                    Gender = "Female",
-                    AgeInMonths = 21
+                    LastName  = "Nguyen",
+                    // Treat DOB as UTC date; time portion irrelevant for DOB
+                    DateOfBirth = new DateTime(2023, 10, 1, 0, 0, 0, DateTimeKind.Utc),
+                    Gender = Gender.Female
+                    // NOTE: Do NOT set AgeInMonths. We compute it in DTOs now.
                 };
 
                 var liam = new Child
                 {
                     FirstName = "Liam",
-                    LastName = "Tran",
-                    DateOfBirth = new DateTime(2024, 1, 15),
-                    Gender = "Male",
-                    AgeInMonths = 18
+                    LastName  = "Tran",
+                    DateOfBirth = new DateTime(2024, 1, 15, 0, 0, 0, DateTimeKind.Utc),
+                    Gender = Gender.Male
                 };
 
                 context.Children.AddRange(emma, liam);
                 context.SaveChanges(); // Save to generate IDs for later use
             }
 
+            // Re-fetch by full name (safer than FirstName only)
+            var emmaChild = context.Children.FirstOrDefault(c => c.FirstName == "Emma" && c.LastName == "Nguyen");
+            var liamChild = context.Children.FirstOrDefault(c => c.FirstName == "Liam" && c.LastName == "Tran");
+
             // --- Seed Milestones ---
-            // Only add milestones if the table is empty
-            if (!context.Milestones.Any())
+            if (!context.Milestones.Any() && emmaChild != null)
             {
-                var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
-                if (emma != null)
-                {
-                    context.Milestones.AddRange(
-                        new Milestone
-                        {
-                            Title = "First smile",
-                            Notes = "She smiled during bath time.",
-                            AchievedDate = new DateTime(2024, 1, 10),
-                            ChildId = emma.Id // Link to Emma
-                        },
-                        new Milestone
-                        {
-                            Title = "Rolled over",
-                            Notes = "Rolled on tummy time mat",
-                            AchievedDate = new DateTime(2024, 2, 15),
-                            ChildId = emma.Id
-                        }
-                    );
-                    context.SaveChanges();
-                }
+                context.Milestones.AddRange(
+                    new Milestone
+                    {
+                        Title = "First smile",
+                        Notes = "She smiled during bath time.",
+                        AchievedDate = new DateTime(2024, 1, 10, 0, 0, 0, DateTimeKind.Utc),
+                        ChildId = emmaChild.Id
+                    },
+                    new Milestone
+                    {
+                        Title = "Rolled over",
+                        Notes = "Rolled on tummy time mat",
+                        AchievedDate = new DateTime(2024, 2, 15, 0, 0, 0, DateTimeKind.Utc),
+                        ChildId = emmaChild.Id
+                    }
+                );
+                context.SaveChanges();
             }
 
             // --- Seed FeedingLogs ---
-            // Only add feeding logs if the table is empty
-            if (!context.FeedingLogs.Any())
+            if (!context.FeedingLogs.Any() && emmaChild != null)
             {
-                var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
-                if (emma != null)
-                {
-                    context.FeedingLogs.AddRange(
-                        new FeedingLog
-                        {
-                            FeedingTime = DateTime.Now.AddHours(-2),
-                            MealType = "Breastmilk",
-                            Notes = "Fed well",
-                            ChildId = emma.Id
-                        },
-                        new FeedingLog
-                        {
-                            FeedingTime = DateTime.Now.AddHours(-1),
-                            MealType = "Formula",
-                            Notes = "Spit up slightly",
-                            ChildId = emma.Id
-                        }
-                    );
-                    context.SaveChanges();
-                }
+                var now = DateTime.UtcNow;
+                context.FeedingLogs.AddRange(
+                    new FeedingLog
+                    {
+                        FeedingTime = now.AddHours(-2), // UTC
+                        MealType = "Breastmilk",
+                        Notes = "Fed well",
+                        ChildId = emmaChild.Id
+                    },
+                    new FeedingLog
+                    {
+                        FeedingTime = now.AddHours(-1),
+                        MealType = "Formula",
+                        Notes = "Spit up slightly",
+                        ChildId = emmaChild.Id
+                    }
+                );
+                context.SaveChanges();
             }
 
             // --- Seed SleepLogs ---
-            // Only add sleep logs if the table is empty
-            if (!context.SleepLogs.Any())
+            if (!context.SleepLogs.Any() && emmaChild != null && liamChild != null)
             {
-                var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
-                var liam = context.Children.FirstOrDefault(c => c.FirstName == "Liam");
-                if (emma != null && liam != null)
-                {
-                    context.SleepLogs.AddRange(
-                        new SleepLog
-                        {
-                            StartTime = DateTime.Now.AddHours(-6),
-                            EndTime = DateTime.Now.AddHours(-4),
-                            Notes = "Afternoon nap after playtime.",
-                            ChildId = emma.Id
-                        },
-                        new SleepLog
-                        {
-                            StartTime = DateTime.Now.AddDays(-1).AddHours(-9),
-                            EndTime = DateTime.Now.AddDays(-1).AddHours(-6),
-                            Notes = "Night sleep, uninterrupted.",
-                            ChildId = liam.Id
-                        }
-                    );
-                    context.SaveChanges();
-                }
+                var now = DateTime.UtcNow;
+                context.SleepLogs.AddRange(
+                    new SleepLog
+                    {
+                        StartTime = now.AddHours(-6),
+                        EndTime   = now.AddHours(-4),
+                        Notes = "Afternoon nap after playtime.",
+                        ChildId = emmaChild.Id
+                    },
+                    new SleepLog
+                    {
+                        StartTime = now.AddDays(-1).AddHours(-9),
+                        EndTime   = now.AddDays(-1).AddHours(-6),
+                        Notes = "Night sleep, uninterrupted.",
+                        ChildId = liamChild.Id
+                    }
+                );
+                context.SaveChanges();
             }
 
             // --- Seed Reminders ---
-            // Only add reminders if the table is empty
-            if (!context.Reminders.Any())
+            if (!context.Reminders.Any() && emmaChild != null)
             {
-                var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
-                if (emma != null)
+                var now = DateTime.UtcNow;
+                context.Reminders.Add(new Reminder
                 {
-                    context.Reminders.Add(new Reminder
-                    {
-                        ChildId = emma.Id,
-                        Title = "Vitamin D drop",
-                        Notes = "Once daily",
-                        DueAt = DateTime.UtcNow.AddMinutes(1),
-                        RepeatRule = RepeatRule.DAILY,
-                        NextRunAt = DateTime.UtcNow.AddMinutes(1),
-                        IsCompleted = false,
-                        Source = ReminderSource.Manual
-                    });
-                    context.SaveChanges();
-                }
+                    ChildId = emmaChild.Id,
+                    Title = "Vitamin D drop",
+                    Notes = "Once daily",
+                    DueAt = now.AddMinutes(1),
+                    RepeatRule = RepeatRule.DAILY,
+                    NextRunAt = now.AddMinutes(1),
+                    IsCompleted = false,
+                    Source = ReminderSource.Manual
+                });
+                context.SaveChanges();
             }
 
             // --- Seed LearningGoals ---
-            // Only add learning goals if the table is empty
-            if (!context.LearningGoals.Any())
+            if (!context.LearningGoals.Any() && emmaChild != null && liamChild != null)
             {
-                // Re-query children to get their generated IDs
-                var emma = context.Children.First(c => c.FirstName == "Emma");
-                var liam = context.Children.First(c => c.FirstName == "Liam");
-
                 context.LearningGoals.AddRange(
                     new LearningGoal
                     {
                         Title = "Learn to stack blocks",
                         IsCompleted = false,
-                        ChildId = emma.Id
+                        ChildId = emmaChild.Id
                     },
                     new LearningGoal
                     {
                         Title = "Recognize colors",
                         IsCompleted = false,
-                        ChildId = liam.Id
+                        ChildId = liamChild.Id
                     }
                 );
                 context.SaveChanges();
             }
 
             // --- Seed ToyRecommendations ---
-            // Only add toy recommendations if the table is empty
-            if (!context.ToyRecommendations.Any())
+            if (!context.ToyRecommendations.Any() && emmaChild != null && liamChild != null)
             {
-                var emma = context.Children.FirstOrDefault(c => c.FirstName == "Emma");
-                var liam = context.Children.FirstOrDefault(c => c.FirstName == "Liam");
+                context.ToyRecommendations.AddRange(
+                    new ToyRecommendation
+                    {
+                        ToyName = "Soft Rattle",
+                        RecommendedAgeInMonths = 3,
+                        Category = "Sensory",
+                        ChildId = emmaChild.Id
+                    },
+                    new ToyRecommendation
+                    {
+                        ToyName = "Stacking Cups",
+                        RecommendedAgeInMonths = 9,
+                        Category = "Motor Skills",
+                        ChildId = emmaChild.Id
+                    },
+                    new ToyRecommendation
+                    {
+                        ToyName = "Shape Sorter",
+                        RecommendedAgeInMonths = 12,
+                        Category = "Cognitive",
+                        ChildId = liamChild.Id
+                    },
+                    new ToyRecommendation
+                    {
+                        ToyName = "Push Walker",
+                        RecommendedAgeInMonths = 10,
+                        Category = "Gross Motor",
+                        ChildId = liamChild.Id
+                    }
+                );
 
-                if (emma != null && liam != null)
-                {
-                    context.ToyRecommendations.AddRange(
-                        new ToyRecommendation
-                        {
-                            ToyName = "Soft Rattle",
-                            RecommendedAgeInMonths = 3,
-                            Category = "Sensory",
-                            ChildId = emma.Id
-                        },
-                        new ToyRecommendation
-                        {
-                            ToyName = "Stacking Cups",
-                            RecommendedAgeInMonths = 9,
-                            Category = "Motor Skills",
-                            ChildId = emma.Id
-                        },
-                        new ToyRecommendation
-                        {
-                            ToyName = "Shape Sorter",
-                            RecommendedAgeInMonths = 12,
-                            Category = "Cognitive",
-                            ChildId = liam.Id
-                        },
-                        new ToyRecommendation
-                        {
-                            ToyName = "Push Walker",
-                            RecommendedAgeInMonths = 10,
-                            Category = "Gross Motor",
-                            ChildId = liam.Id
-                        }
-                    );
-
-                    context.SaveChanges();
-                }
+                context.SaveChanges();
             }
         }
     }

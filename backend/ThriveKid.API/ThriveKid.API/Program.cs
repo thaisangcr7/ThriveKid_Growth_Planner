@@ -31,7 +31,7 @@ namespace ThriveKid.API
             // Register the ChildService for dependency injection
             // This allows us to use IChildService in controllers or other services
             // This line tells .NET: “Whenever I need IChildService, give me ChildService.”
-            builder.Services.AddScoped<IChildService, ChildService>();
+            builder.Services.AddScoped<IChildService, ChildServices>();
             builder.Services.AddScoped<IMilestoneService, MilestoneService>();
             builder.Services.AddScoped<IFeedingLogService, FeedingLogService>();
             builder.Services.AddScoped<ISleepLogService, SleepLogService>();
@@ -39,8 +39,14 @@ namespace ThriveKid.API
             builder.Services.AddScoped<ILearningGoalService, LearningGoalService>();
             builder.Services.AddScoped<IToyRecommendationService, ToyRecommendationService>();
 
-            // Register all FluentValidation validators from this assembly
+            // Register all FluentValidation validators & enable auto-validation
+            builder.Services.AddFluentValidationAutoValidation(o =>
+            {
+                o.DisableDataAnnotationsValidation = true;
+            });
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+            // Background engine
             builder.Services.AddHostedService<ReminderEngine>();
 
             // Register the DbContext with the service container
